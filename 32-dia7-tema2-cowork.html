@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Día 7.2 - Claude Cowork</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 2.5em;
+        }
+
+        h2 {
+            color: #667eea;
+            margin-top: 35px;
+            margin-bottom: 20px;
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fff3cd, #ffe69c);
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 10px;
+        }
+
+        .feature-card {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #667eea;
+        }
+
+        .bottom-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .next-button,
+        .back-button {
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .next-button {
+            background: linear-gradient(135deg, #4caf50, #45a049);
+        }
+
+        .back-button {
+            background: linear-gradient(135deg, #757575, #616161);
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .nav-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+            .nav-button {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+            .bottom-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .next-button, .back-button {
+                width: 100%;
+                justify-content: center;
+            }
+            /* Grid adjustments */
+            .vs-grid, .skills-grid, .stat-grid, .grid-container {
+                grid-template-columns: 1fr !important;
+            }
+            /* Table adjustments */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            /* Topic list specific (Day 0) */
+            .topic {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .topic span {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            .topic a {
+                width: 100%;
+                text-align: center;
+                display: block;
+                margin: 5px 0;
+            }
+            .time-badge {
+                align-self: flex-start;
+                margin-top: 5px;
+            }
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .nav-bar {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            .nav-button {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+            .bottom-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .next-button, .back-button {
+                width: 100%;
+                justify-content: center;
+            }
+            /* Grid adjustments */
+            .vs-grid, .skills-grid, .stat-grid, .grid-container, .features {
+                grid-template-columns: 1fr !important;
+            }
+            /* Table adjustments */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            /* Topic list specific (Day 0) */
+            .topic {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .topic span {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            .topic a {
+                width: 100%;
+                text-align: center;
+                display: block;
+                margin: 5px 0;
+            }
+            .time-badge {
+                align-self: flex-start;
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="0- plan-estudio-claude-ai.html" class="nav-button">← Volver al Plan</a>
+            <div style="color: #667eea; font-weight: 600;">Día 7 - Tema 2/5</div>
+        </div>
+
+        <h1>🛠️ Claude Cowork</h1>
+        <p style="color: #666; font-size: 1.2em; margin-bottom: 30px; font-style: italic;">Automatización de tareas sin
+            código</p>
+
+        <div class="highlight-box">
+            <h3 style="color: #856404;">🎯 En 45 minutos:</h3>
+            <p>• Qué es Cowork y para quién es<br>
+                • Desktop app para automatizar archivos<br>
+                • Casos de uso reales<br>
+                • Diferencia con Claude Code</p>
+        </div>
+
+        <h2>🤔 ¿Qué es Claude Cowork?</h2>
+
+        <div
+            style="background: #e8f5e9; padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 5px solid #4caf50;">
+            <h3 style="color: #2e7d32; margin-bottom: 15px;">Definición</h3>
+            <p style="color: #555; line-height: 1.8;">
+                <strong>Claude Cowork</strong> es una desktop app (lanzada Enero 2026 en beta) que permite a usuarios
+                NO-técnicos automatizar tareas con archivos sin escribir código.<br><br>
+
+                <strong>Target:</strong> Office workers, managers, creatives - gente sin background de programación<br>
+                <strong>Precio:</strong> Incluido en Pro/Max<br>
+                <strong>Plataformas:</strong> Windows, macOS
+            </p>
+        </div>
+
+        <h2>✨ Features Principales</h2>
+
+        <div class="feature-card">
+            <h3 style="color: #667eea;">🎯 Drag & Drop Workflows</h3>
+            <p style="color: #555; line-height: 1.8; margin-top: 10px;">
+                Crea automations visualmente sin código:<br>
+                • Arrastras archivos/carpetas<br>
+                • Defines qué hacer (rename, convert, organize)<br>
+                • Claude ejecuta las tareas<br>
+                • Todo visual, sin terminal
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <h3 style="color: #667eea;">📁 File Management Inteligente</h3>
+            <p style="color: #555; line-height: 1.8; margin-top: 10px;">
+                Ejemplos de automations:<br>
+                • Renombrar 100 archivos según patrón<br>
+                • Convertir PDFs a Word en batch<br>
+                • Organizar fotos por fecha/ubicación<br>
+                • Comprimir videos automáticamente
+            </p>
+        </div>
+
+        <h2>🆚 Cowork vs Claude Code</h2>
+
+        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+            <tr style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                <th style="color: white; padding: 15px; text-align: left;">Aspecto</th>
+                <th style="color: white; padding: 15px; text-align: left;">Cowork</th>
+                <th style="color: white; padding: 15px; text-align: left;">Claude Code</th>
+            </tr>
+            <tr style="background: #f8f9ff;">
+                <td style="padding: 15px;"><strong>Target</strong></td>
+                <td style="padding: 15px;">No-developers</td>
+                <td style="padding: 15px;">Developers</td>
+            </tr>
+            <tr>
+                <td style="padding: 15px;"><strong>Interface</strong></td>
+                <td style="padding: 15px;">Visual (GUI)</td>
+                <td style="padding: 15px;">Terminal (CLI)</td>
+            </tr>
+            <tr style="background: #f8f9ff;">
+                <td style="padding: 15px;"><strong>Tareas</strong></td>
+                <td style="padding: 15px;">File management</td>
+                <td style="padding: 15px;">Coding, debugging</td>
+            </tr>
+            <tr>
+                <td style="padding: 15px;"><strong>Código requerido</strong></td>
+                <td style="padding: 15px;">❌ No</td>
+                <td style="padding: 15px;">✅ Sí</td>
+            </tr>
+        </table>
+
+        <div class="highlight-box">
+            <h3>🎓 Resumen</h3>
+            <p><strong>Cowork:</strong> Desktop app para no-developers<br>
+                <strong>Launch:</strong> Enero 2026 (beta pública)<br>
+                <strong>Uso:</strong> Automatizar tareas de archivos sin código<br>
+                <strong>Incluido en:</strong> Pro/Max ($20-$200/mes)
+            </p>
+        </div>
+
+        <div class="bottom-nav">
+            <a href="0- plan-estudio-claude-ai.html" class="nav-button">← Volver al Plan</a>
+            <a href="31-dia7-tema1-futuro.html" class="back-button">← Anterior: Futuro</a>
+            <a href="33-dia7-tema3-skills-mcp.html" class="next-button">Siguiente: Skills & MCP →</a>
+        </div>
+    </div>
+</body>
+
+</html>

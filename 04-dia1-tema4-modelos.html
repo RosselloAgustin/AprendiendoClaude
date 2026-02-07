@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Día 1.4 - Familia de Modelos Claude</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .breadcrumb {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        h2 {
+            color: #667eea;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fff3cd, #ffe69c);
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 10px;
+        }
+
+        .highlight-box h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .model-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .model-card {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .model-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .model-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+        }
+
+        .opus-card::before {
+            background: linear-gradient(90deg, #ff6b6b, #ee5a6f);
+        }
+
+        .sonnet-card::before {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .haiku-card::before {
+            background: linear-gradient(90deg, #4ecdc4, #44a08d);
+        }
+
+        .model-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .model-card h3 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .opus-card h3 {
+            color: #ff6b6b;
+        }
+
+        .sonnet-card h3 {
+            color: #667eea;
+        }
+
+        .haiku-card h3 {
+            color: #4ecdc4;
+        }
+
+        .model-tagline {
+            color: #999;
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+
+        .model-specs {
+            background: #f8f9ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .spec-item {
+            margin: 10px 0;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .spec-label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .best-for {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .best-for h4 {
+            color: #2e7d32;
+            margin-bottom: 8px;
+        }
+
+        .best-for ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .best-for li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+            color: #555;
+        }
+
+        .best-for li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: bold;
+        }
+
+        .comparison-table {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 30px 0;
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            color: #555;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #f8f9ff;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 2px;
+        }
+
+        .badge-speed {
+            background: #4ecdc4;
+            color: white;
+        }
+
+        .badge-power {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .badge-balance {
+            background: #667eea;
+            color: white;
+        }
+
+        .badge-cost {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .info-card {
+            background: #e8f5e9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #4caf50;
+        }
+
+        .info-card h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+        }
+
+        .tip-box {
+            background: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .tip-box h4 {
+            color: #1565c0;
+            margin-bottom: 10px;
+        }
+
+        .decision-tree {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border: 2px solid #667eea;
+        }
+
+        .decision-item {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .decision-item strong {
+            color: #667eea;
+            font-size: 1.1em;
+        }
+
+        .bottom-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .next-button {
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .next-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .back-button {
+            background: linear-gradient(135deg, #757575, #616161);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(117, 117, 117, 0.4);
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .nav-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+            .nav-button {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+            .bottom-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .next-button, .back-button {
+                width: 100%;
+                justify-content: center;
+            }
+            /* Grid adjustments */
+            .vs-grid, .skills-grid, .stat-grid, .grid-container {
+                grid-template-columns: 1fr !important;
+            }
+            /* Table adjustments */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            /* Topic list specific (Day 0) */
+            .topic {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .topic span {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            .topic a {
+                width: 100%;
+                text-align: center;
+                display: block;
+                margin: 5px 0;
+            }
+            .time-badge {
+                align-self: flex-start;
+                margin-top: 5px;
+            }
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .nav-bar {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            .nav-button {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+            .bottom-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .next-button, .back-button {
+                width: 100%;
+                justify-content: center;
+            }
+            /* Grid adjustments */
+            .vs-grid, .skills-grid, .stat-grid, .grid-container, .features {
+                grid-template-columns: 1fr !important;
+            }
+            /* Table adjustments */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            /* Topic list specific (Day 0) */
+            .topic {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .topic span {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            .topic a {
+                width: 100%;
+                text-align: center;
+                display: block;
+                margin: 5px 0;
+            }
+            .time-badge {
+                align-self: flex-start;
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="0- plan-estudio-claude-ai.html" class="nav-button">← Volver al Plan</a>
+            <div style="color: #667eea; font-weight: 600;">Día 1 - Tema 4/5</div>
+        </div>
+
+        <div class="breadcrumb">
+            Día 1: Fundamentos → Familia de Modelos
+        </div>
+
+        <h1>🎭 La Familia Claude 4.5</h1>
+        <p class="subtitle">Opus, Sonnet, Haiku: Conocé cuándo usar cada uno</p>
+
+        <div class="highlight-box">
+            <h3>🎯 Lo que vas a aprender en 40 minutos:</h3>
+            <p>• Las diferencias entre Claude Opus 4.5, Sonnet 4.5 y Haiku 4.5<br>
+                • Cuándo usar cada modelo según tu necesidad<br>
+                • Comparación de rendimiento y costos<br>
+                • Cómo elegir el modelo correcto para cada tarea</p>
+        </div>
+
+        <div class="info-card">
+            <h3>🎨 Los Nombres: Una Referencia Poética</h3>
+            <p>Anthropic nombró los modelos según formas poéticas japonesas e italianas, organizadas por complejidad:
+            </p>
+            <p style="margin-top: 10px;">
+                • <strong>Haiku:</strong> Poema japonés de 3 líneas (simple, directo) = Modelo rápido y ligero<br>
+                • <strong>Sonnet:</strong> Poema de 14 líneas (balanceado, elegante) = Modelo equilibrado<br>
+                • <strong>Opus:</strong> "Gran obra" en latín (complejo, profundo) = Modelo más poderoso</p>
+        </div>
+
+        <h2>🔷 Los Tres Modelos Explicados</h2>
+
+        <div class="model-grid">
+            <div class="model-card opus-card">
+                <span class="model-icon">👑</span>
+                <h3>Claude Opus 4.5</h3>
+                <p class="model-tagline">"El Cerebro Supremo"</p>
+
+                <div class="model-specs">
+                    <div class="spec-item">
+                        <span class="spec-label">Velocidad:</span> Media-Lenta
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Inteligencia:</span> Máxima
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Contexto:</span> Hasta 1M tokens
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Costo API:</span> $$$ (más caro)
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Disponibilidad:</span> Solo en Max ($100-$200/mes)
+                    </div>
+                </div>
+
+                <div class="best-for">
+                    <h4>✨ Mejor para:</h4>
+                    <ul>
+                        <li>Análisis complejos de negocio</li>
+                        <li>Código avanzado y arquitectura</li>
+                        <li>Razonamiento matemático difícil</li>
+                        <li>Documentos legales/médicos</li>
+                        <li>Tareas que requieren máxima precisión</li>
+                    </ul>
+                </div>
+
+                <div style="margin-top: 15px;">
+                    <span class="badge badge-power">Máximo Poder</span>
+                    <span class="badge badge-cost">Alto Costo</span>
+                </div>
+            </div>
+
+            <div class="model-card sonnet-card">
+                <span class="model-icon">⚡</span>
+                <h3>Claude Sonnet 4.5</h3>
+                <p class="model-tagline">"El Equilibrio Perfecto"</p>
+
+                <div class="model-specs">
+                    <div class="spec-item">
+                        <span class="spec-label">Velocidad:</span> Rápida
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Inteligencia:</span> Muy Alta
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Contexto:</span> Hasta 200K tokens
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Costo API:</span> $$ (moderado)
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Disponibilidad:</span> Free, Pro, Max
+                    </div>
+                </div>
+
+                <div class="best-for">
+                    <h4>✨ Mejor para:</h4>
+                    <ul>
+                        <li>Coding profesional (77.2% SWE-bench)</li>
+                        <li>Escritura de contenido</li>
+                        <li>Análisis de datos</li>
+                        <li>Uso diario general</li>
+                        <li>90% de tus necesidades</li>
+                    </ul>
+                </div>
+
+                <div style="margin-top: 15px;">
+                    <span class="badge badge-balance">Mejor Relación Calidad-Precio</span>
+                    <span class="badge badge-speed">Rápido</span>
+                </div>
+            </div>
+
+            <div class="model-card haiku-card">
+                <span class="model-icon">🚀</span>
+                <h3>Claude Haiku 4.5</h3>
+                <p class="model-tagline">"La Velocidad Pura"</p>
+
+                <div class="model-specs">
+                    <div class="spec-item">
+                        <span class="spec-label">Velocidad:</span> Ultra-rápida
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Inteligencia:</span> Alta
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Contexto:</span> Hasta 200K tokens
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Costo API:</span> $ (más barato)
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Disponibilidad:</span> API principalmente
+                    </div>
+                </div>
+
+                <div class="best-for">
+                    <h4>✨ Mejor para:</h4>
+                    <ul>
+                        <li>Respuestas rápidas y simples</li>
+                        <li>Chatbots de atención al cliente</li>
+                        <li>Clasificación de texto</li>
+                        <li>Tareas repetitivas en volumen</li>
+                        <li>Apps que necesitan latencia baja</li>
+                    </ul>
+                </div>
+
+                <div style="margin-top: 15px;">
+                    <span class="badge badge-speed">Más Rápido</span>
+                    <span class="badge badge-cost">Más Barato</span>
+                </div>
+            </div>
+        </div>
+
+        <h2>📊 Comparación Directa</h2>
+
+        <div class="comparison-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Característica</th>
+                        <th>Haiku 4.5</th>
+                        <th>Sonnet 4.5</th>
+                        <th>Opus 4.5</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>SWE-bench (Coding)</strong></td>
+                        <td>~60%</td>
+                        <td><strong>77.2% 🏆</strong></td>
+                        <td>75%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>MMLU (Conocimiento)</strong></td>
+                        <td>85%</td>
+                        <td>88.7%</td>
+                        <td><strong>90.1% 🏆</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Velocidad</strong></td>
+                        <td><strong>🚀🚀🚀 Más rápido</strong></td>
+                        <td>🚀🚀 Rápido</td>
+                        <td>🚀 Moderado</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Contexto Max</strong></td>
+                        <td>200K tokens</td>
+                        <td>200K tokens</td>
+                        <td><strong>1M tokens 🏆</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Costo (Input/MTok)</strong></td>
+                        <td>$0.80</td>
+                        <td>$3.00</td>
+                        <td>$15.00</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Costo (Output/MTok)</strong></td>
+                        <td>$4.00</td>
+                        <td>$15.00</td>
+                        <td>$75.00</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Plan Free</strong></td>
+                        <td>❌ No</td>
+                        <td>✅ Sí</td>
+                        <td>❌ No</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Uso Recomendado</strong></td>
+                        <td>Alto volumen simple</td>
+                        <td>Uso general diario</td>
+                        <td>Tareas complejas críticas</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>🎯 Guía de Decisión: ¿Cuál Usar?</h2>
+
+        <div class="decision-tree">
+            <h3 style="color: #667eea; margin-bottom: 20px;">Decisión Rápida:</h3>
+
+            <div class="decision-item">
+                <strong>🚀 Usa Haiku si:</strong>
+                <p style="margin-top: 8px; color: #555;">
+                    • Necesitás respuestas instantáneas<br>
+                    • Hacés preguntas simples en volumen<br>
+                    • Estás construyendo un chatbot de soporte<br>
+                    • El costo es crítico y la tarea es simple
+                </p>
+            </div>
+
+            <div class="decision-item">
+                <strong>⚡ Usa Sonnet si:</strong>
+                <p style="margin-top: 8px; color: #555;">
+                    • Estás programando (es el MEJOR del mundo)<br>
+                    • Necesitás análisis de documentos<br>
+                    • Escribís contenido profesional<br>
+                    • Querés el mejor balance calidad-precio<br>
+                    • Tenés plan Free/Pro (es tu única opción poderosa)
+                </p>
+            </div>
+
+            <div class="decision-item">
+                <strong>👑 Usa Opus si:</strong>
+                <p style="margin-top: 8px; color: #555;">
+                    • Necesitás máxima precisión en análisis complejo<br>
+                    • Trabajás con documentos legales/médicos<br>
+                    • Requieres razonamiento profundo matemático<br>
+                    • Procesás codebases enteros (1M tokens)<br>
+                    • Tenés plan Max ($100-$200/mes)
+                </p>
+            </div>
+        </div>
+
+        <div class="tip-box">
+            <h4>💡 Consejo Pro</h4>
+            <p><strong>El 90% de usuarios solo necesitan Sonnet 4.5.</strong> Es tan bueno que supera a Opus en coding
+                (77.2% vs 75% en SWE-bench) y es mucho más rápido. Solo cambiá a Opus para tareas genuinamente complejas
+                que requieran el máximo razonamiento.</p>
+        </div>
+
+        <h2>🔄 Evolución de los Modelos</h2>
+
+        <div class="info-card">
+            <h3>Historia Rápida</h3>
+            <p><strong>2023:</strong> Claude 1, Claude 2 (modelo único)<br>
+                <strong>Marzo 2024:</strong> Claude 3 introduce la familia: Haiku, Sonnet, Opus<br>
+                <strong>Junio 2024:</strong> Claude 3.5 Sonnet (sorprende al mundo)<br>
+                <strong>Mayo 2025:</strong> Claude 4 (Opus 4, Sonnet 4)<br>
+                <strong>2026 (ahora):</strong> Claude 4.5 - La generación actual
+            </p>
+
+            <p style="margin-top: 15px;"><strong>Cambio clave en 4.5:</strong> Sonnet se volvió tan bueno en coding que
+                supera a Opus. Esto es inusual - normalmente el modelo más grande siempre gana. Muestra que Anthropic
+                está optimizando modelos para tareas específicas.</p>
+        </div>
+
+        <div class="highlight-box">
+            <h3>🎓 Resumen en 3 Frases</h3>
+            <p>1. <strong>Haiku 4.5:</strong> Rápido y barato para tareas simples en volumen.<br>
+                2. <strong>Sonnet 4.5:</strong> El mejor modelo de coding del mundo (77.2%) y tu go-to para todo.<br>
+                3. <strong>Opus 4.5:</strong> Máxima inteligencia para análisis complejos (solo en plan Max).</p>
+        </div>
+
+        <div class="bottom-nav">
+            <a href="0- plan-estudio-claude-ai.html" class="nav-button">← Volver al Plan</a>
+            <a href="03-dia1-tema3-interfaz.html" class="back-button">← Anterior: Interfaz</a>
+            <a href="05-dia1-tema5-practica.html" class="next-button">
+                Siguiente: Tu Primera Práctica →
+            </a>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            localStorage.setItem('dia1_tema4_completed', 'true');
+        }
+    </script>
+</body>
+
+</html>

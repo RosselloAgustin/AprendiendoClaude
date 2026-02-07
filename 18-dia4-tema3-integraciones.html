@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Día 4.3 - Integraciones</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 2.5em;
+        }
+
+        h2 {
+            color: #667eea;
+            margin-top: 35px;
+            margin-bottom: 20px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fff3cd, #ffe69c);
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 10px;
+        }
+
+        .integration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .integration-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #667eea;
+        }
+
+        .integration-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .bottom-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .next-button {
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .back-button {
+            background: linear-gradient(135deg, #757575, #616161);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .nav-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+            .nav-button {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+            .bottom-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .next-button, .back-button {
+                width: 100%;
+                justify-content: center;
+            }
+            /* Grid adjustments */
+            .vs-grid, .skills-grid, .stat-grid, .grid-container {
+                grid-template-columns: 1fr !important;
+            }
+            /* Table adjustments */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            /* Topic list specific (Day 0) */
+            .topic {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .topic span {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            .topic a {
+                width: 100%;
+                text-align: center;
+                display: block;
+                margin: 5px 0;
+            }
+            .time-badge {
+                align-self: flex-start;
+                margin-top: 5px;
+            }
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .nav-bar {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            .nav-button {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+            .bottom-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .next-button, .back-button {
+                width: 100%;
+                justify-content: center;
+            }
+            /* Grid adjustments */
+            .vs-grid, .skills-grid, .stat-grid, .grid-container, .features {
+                grid-template-columns: 1fr !important;
+            }
+            /* Table adjustments */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            /* Topic list specific (Day 0) */
+            .topic {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .topic span {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            .topic a {
+                width: 100%;
+                text-align: center;
+                display: block;
+                margin: 5px 0;
+            }
+            .time-badge {
+                align-self: flex-start;
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="0- plan-estudio-claude-ai.html" class="nav-button">← Volver al Plan</a>
+            <div style="color: #667eea; font-weight: 600;">Día 4 - Tema 3/5</div>
+        </div>
+
+        <h1>🔗 Integraciones de Claude</h1>
+        <p style="color: #666; font-size: 1.2em; margin-bottom: 30px; font-style: italic;">Conecta Claude con tus
+            herramientas</p>
+
+        <div class="highlight-box">
+            <h3 style="color: #856404;">🎯 En 35 minutos:</h3>
+            <p>• Integraciones nativas (Google, Slack, etc)<br>
+                • MCP Servers (GitHub, Drive, Notion)<br>
+                • Claude in Chrome<br>
+                • Cómo conectar tus propias herramientas</p>
+        </div>
+
+        <h2>🏢 Integraciones Nativas</h2>
+
+        <div class="integration-grid">
+            <div class="integration-card">
+                <div class="icon">📧</div>
+                <h3>Google Workspace</h3>
+                <p style="color: #555; line-height: 1.6;">Acceso a Gmail, Drive, Docs, Sheets. Claude puede leer emails,
+                    buscar documentos, editar spreadsheets.</p>
+            </div>
+
+            <div class="integration-card">
+                <div class="icon">💬</div>
+                <h3>Slack</h3>
+                <p style="color: #555; line-height: 1.6;">Claude como bot en tu workspace. Responde preguntas, resume
+                    threads, busca info en canales.</p>
+            </div>
+
+            <div class="integration-card">
+                <div class="icon">📅</div>
+                <h3>Microsoft Teams</h3>
+                <p style="color: #555; line-height: 1.6;">Integración similar a Slack. Disponible para cuentas
+                    Enterprise.</p>
+            </div>
+
+            <div class="integration-card">
+                <div class="icon">🌐</div>
+                <h3>Claude in Chrome</h3>
+                <p style="color: #555; line-height: 1.6;">Extensión beta que lee páginas web y ayuda con navegación.
+                    Todavía en preview.</p>
+            </div>
+        </div>
+
+        <h2>🔌 MCP Servers (Model Context Protocol)</h2>
+
+        <div
+            style="background: #e8f5e9; padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 5px solid #4caf50;">
+            <h3 style="color: #2e7d32; margin-bottom: 15px;">¿Qué es MCP?</h3>
+            <p style="line-height: 1.8; color: #555;">
+                Protocolo estándar para que Claude se conecte con herramientas externas. Los "MCP Servers" son
+                adaptadores que traducen entre Claude y tus apps.
+            </p>
+        </div>
+
+        <div class="integration-grid">
+            <div class="integration-card">
+                <div class="icon">🐙</div>
+                <h3>GitHub MCP</h3>
+                <p style="color: #555; line-height: 1.6;">Repos, issues, PRs, commits. Claude puede crear branches,
+                    abrir PRs, revisar código.</p>
+            </div>
+
+            <div class="integration-card">
+                <div class="icon">📁</div>
+                <h3>Google Drive MCP</h3>
+                <p style="color: #555; line-height: 1.6;">Buscar archivos, leer Docs, editar Sheets. Full access a tu
+                    Drive.</p>
+            </div>
+
+            <div class="integration-card">
+                <div class="icon">📝</div>
+                <h3>Notion MCP</h3>
+                <p style="color: #555; line-height: 1.6;">Leer páginas, actualizar databases, crear contenido en tu
+                    workspace.</p>
+            </div>
+
+            <div class="integration-card">
+                <div class="icon">🗄️</div>
+                <h3>Database MCPs</h3>
+                <p style="color: #555; line-height: 1.6;">PostgreSQL, MySQL, SQLite. Claude puede hacer queries y
+                    analizar datos.</p>
+            </div>
+
+            <div class="integration-card">
+                <div class="icon">📂</div>
+                <h3>Filesystem MCP</h3>
+                <p style="color: #555; line-height: 1.6;">Acceso a archivos locales. Lectura/escritura en tu
+                    computadora.</p>
+            </div>
+
+            <div class="integration-card">
+                <div class="icon">🔧</div>
+                <h3>Custom MCPs</h3>
+                <p style="color: #555; line-height: 1.6;">Podés crear tu propio MCP Server para cualquier API o
+                    herramienta.</p>
+            </div>
+        </div>
+
+        <h2>⚡ Zapier, Make, n8n</h2>
+
+        <div
+            style="background: #f8f9ff; padding: 25px; border-radius: 15px; margin: 25px 0; border-left: 5px solid #667eea;">
+            <h3 style="color: #667eea; margin-bottom: 15px;">No-Code Automation</h3>
+            <p style="line-height: 1.8; color: #555;">
+                <strong>Zapier:</strong> Conecta Claude con 5000+ apps. Ej: "Cuando llega email con 'urgente', Claude
+                resume y envía a Slack"<br><br>
+                <strong>Make (ex-Integromat):</strong> Workflows visuales más complejos. Mejor para automations
+                multi-step.<br><br>
+                <strong>n8n:</strong> Open source alternative. Self-hosted, más control.
+            </p>
+        </div>
+
+        <div class="highlight-box">
+            <h3>🎓 Resumen</h3>
+            <p><strong>Nativas:</strong> Google Workspace, Slack, Teams, Chrome<br>
+                <strong>MCP:</strong> GitHub, Drive, Notion, databases, filesystem<br>
+                <strong>No-code:</strong> Zapier, Make, n8n para workflows<br>
+                <strong>Custom:</strong> Podés crear tus propios MCPs
+            </p>
+        </div>
+
+        <div class="bottom-nav">
+            <a href="0- plan-estudio-claude-ai.html" class="nav-button">← Volver al Plan</a>
+            <a href="17-dia4-tema2-api.html" class="back-button">← Anterior: API</a>
+            <a href="19-dia4-tema4-team-enterprise.html" class="next-button">Siguiente: Team & Enterprise →</a>
+        </div>
+    </div>
+</body>
+
+</html>

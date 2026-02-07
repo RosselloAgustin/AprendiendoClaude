@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Día 1.5 - Tu Primera Práctica</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .breadcrumb {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        h2 {
+            color: #667eea;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        h3 {
+            color: #667eea;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fff3cd, #ffe69c);
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 10px;
+        }
+
+        .highlight-box h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .exercise-card {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .exercise-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .exercise-card h3 {
+            color: #667eea;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .prompt-box {
+            background: white;
+            border: 2px dashed #667eea;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            color: #333;
+        }
+
+        .prompt-label {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .prompt-text {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .tip-box {
+            background: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .tip-box h4 {
+            color: #1565c0;
+            margin-bottom: 10px;
+        }
+
+        .tip-box p {
+            color: #0d47a1;
+            line-height: 1.6;
+        }
+
+        .info-card {
+            background: #e8f5e9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #4caf50;
+        }
+
+        .info-card h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+        }
+
+        .warning-box {
+            background: #fff3e0;
+            border-left: 5px solid #ff9800;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+        }
+
+        .warning-box h4 {
+            color: #e65100;
+            margin-bottom: 10px;
+        }
+
+        .checklist {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+
+        .checklist h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .checklist-item {
+            padding: 12px;
+            margin: 10px 0;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            border-left: 3px solid #4caf50;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        .skills-learned {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .skill-badge {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .example-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .example-box {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 10px;
+            border-top: 4px solid #667eea;
+        }
+
+        .example-box h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .example-box p {
+            color: #555;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        .congrats-box {
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+        }
+
+        .congrats-box h2 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .bottom-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .next-button {
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .next-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .back-button {
+            background: linear-gradient(135deg, #757575, #616161);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(117, 117, 117, 0.4);
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .nav-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+            .nav-button {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+            .bottom-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .next-button, .back-button {
+                width: 100%;
+                justify-content: center;
+            }
+            /* Grid adjustments */
+            .vs-grid, .skills-grid, .stat-grid, .grid-container {
+                grid-template-columns: 1fr !important;
+            }
+            /* Table adjustments */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            /* Topic list specific (Day 0) */
+            .topic {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .topic span {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            .topic a {
+                width: 100%;
+                text-align: center;
+                display: block;
+                margin: 5px 0;
+            }
+            .time-badge {
+                align-self: flex-start;
+                margin-top: 5px;
+            }
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .nav-bar {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            .nav-button {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+            .bottom-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .next-button, .back-button {
+                width: 100%;
+                justify-content: center;
+            }
+            /* Grid adjustments */
+            .vs-grid, .skills-grid, .stat-grid, .grid-container, .features {
+                grid-template-columns: 1fr !important;
+            }
+            /* Table adjustments */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            /* Topic list specific (Day 0) */
+            .topic {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .topic span {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            .topic a {
+                width: 100%;
+                text-align: center;
+                display: block;
+                margin: 5px 0;
+            }
+            .time-badge {
+                align-self: flex-start;
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="0- plan-estudio-claude-ai.html" class="nav-button">← Volver al Plan</a>
+            <div style="color: #667eea; font-weight: 600;">Día 1 - Tema 5/5</div>
+        </div>
+
+        <div class="breadcrumb">
+            Día 1: Fundamentos → Tu Primera Práctica
+        </div>
+
+        <h1>🎯 ¡Manos a la Obra!</h1>
+        <p class="subtitle">Primera conversación y análisis de imagen con Claude</p>
+
+        <div class="highlight-box">
+            <h3>🎯 Lo que vas a hacer en 45 minutos:</h3>
+            <p>• Tu primera conversación estructurada con Claude<br>
+                • Analizar una imagen (multimodal en acción)<br>
+                • Practicar diferentes tipos de prompts<br>
+                • Entender las capacidades y límites reales</p>
+        </div>
+
+        <div class="warning-box">
+            <h4>⚠️ Antes de Empezar</h4>
+            <p><strong>Asegurate de tener:</strong></p>
+            <p style="margin-top: 10px;">
+                ✓ Cuenta creada en claude.ai<br>
+                ✓ Sesión iniciada<br>
+                ✓ Claude Sonnet 4.5 seleccionado (es el default)<br>
+                ✓ Una imagen en tu computadora para probar (puede ser cualquier foto)</p>
+        </div>
+
+        <h2>📝 Ejercicio 1: Conversación Básica (10 min)</h2>
+
+        <div class="exercise-card">
+            <div class="exercise-number">1</div>
+            <h3>Presentación y Contexto</h3>
+            <p style="color: #555; line-height: 1.6; margin-bottom: 15px;">
+                Vamos a enseñarte la forma correcta de iniciar una conversación con Claude. Cuanto más contexto des,
+                mejor será la respuesta.
+            </p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">💬 PROMPT PARA COPIAR:</div>
+                <div class="prompt-text">
+                    Hola Claude, soy [tu nombre] y estoy aprendiendo sobre IA y específicamente sobre vos. Estoy
+                    siguiendo un plan de estudio de 7 días para dominar claude.ai.
+
+                    Quiero que me ayudes con algo: dame una explicación clara (en 3-4 párrafos) sobre qué hace único a
+                    Anthropic comparado con OpenAI. Escribí en un tono conversacional, como si estuvieras explicándole a
+                    un amigo que sabe de tecnología pero no es experto en IA.
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <h4>💡 Por qué funciona este prompt:</h4>
+                <p>
+                    1. <strong>Das contexto:</strong> Claude sabe quién sos y qué estás haciendo<br>
+                    2. <strong>Especificás formato:</strong> "3-4 párrafos" (evita respuestas eternas)<br>
+                    3. <strong>Defines el tono:</strong> "conversacional, como a un amigo"<br>
+                    4. <strong>Ajustas nivel:</strong> "sabe de tech pero no es experto en IA"
+                </p>
+            </div>
+        </div>
+
+        <div class="exercise-card">
+            <div class="exercise-number">2</div>
+            <h3>Follow-up: Profundizar</h3>
+            <p style="color: #555; line-height: 1.6; margin-bottom: 15px;">
+                Ahora probá hacer una pregunta de seguimiento para profundizar. Esto prueba la memoria de contexto de
+                Claude.
+            </p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">💬 PROMPT PARA COPIAR:</div>
+                <div class="prompt-text">
+                    Gracias! Ahora dame un ejemplo concreto de cómo Constitutional AI hace que tus respuestas sean
+                    diferentes a las de ChatGPT en una situación real. Usa un ejemplo específico.
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3>🔍 Qué Observar</h3>
+                <p>Claude debería:</p>
+                <p style="margin-top: 10px;">
+                    • Recordar que ya hablaste de Constitutional AI<br>
+                    • Dar un ejemplo concreto (no genérico)<br>
+                    • Mantener el tono conversacional que pediste<br>
+                    • Ser específico sobre diferencias con ChatGPT</p>
+            </div>
+        </div>
+
+        <h2>🖼️ Ejercicio 2: Análisis de Imagen (15 min)</h2>
+
+        <div class="exercise-card">
+            <div class="exercise-number">3</div>
+            <h3>Subir y Analizar Imagen</h3>
+            <p style="color: #555; line-height: 1.6; margin-bottom: 15px;">
+                Ahora vamos a probar la capacidad multimodal de Claude. Elegí UNA de estas opciones:
+            </p>
+
+            <div class="example-grid">
+                <div class="example-box">
+                    <h4>📊 Opción A: Gráfico o Chart</h4>
+                    <p>Subí una captura de pantalla de cualquier gráfico (ventas, estadísticas, etc.)</p>
+                </div>
+                <div class="example-box">
+                    <h4>📸 Opción B: Foto Personal</h4>
+                    <p>Una foto de tu espacio de trabajo, tu ciudad, o algo significativo para vos</p>
+                </div>
+                <div class="example-box">
+                    <h4>📄 Opción C: Documento</h4>
+                    <p>Screenshot de un PDF, página web, o documento con texto e imágenes</p>
+                </div>
+                <div class="example-box">
+                    <h4>🎨 Opción D: Diseño</h4>
+                    <p>Captura de un diseño, meme, infografía o ilustración</p>
+                </div>
+            </div>
+
+            <div style="background: #f8f9ff; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                <strong style="color: #667eea;">Cómo subir la imagen:</strong>
+                <p style="color: #555; margin-top: 10px; line-height: 1.6;">
+                    1. Click en el ícono de clip (📎) en el área de texto<br>
+                    2. Seleccioná tu imagen<br>
+                    3. Esperá a que se suba (verás un preview)<br>
+                    4. Escribí tu prompt
+                </p>
+            </div>
+
+            <div class="prompt-box">
+                <div class="prompt-label">💬 PROMPT SEGÚN TU OPCIÓN:</div>
+                <div class="prompt-text">
+                    <strong>Si subiste un gráfico/chart:</strong>
+                    Analiza esta imagen en detalle. Dame: 1) Qué tipo de visualización es, 2) Los insights clave que
+                    ves, 3) Si hay algo que mejorarías en cómo se presenta la data.
+
+                    <strong>Si subiste una foto personal:</strong>
+                    Describe todo lo que ves en esta imagen. Sé específico sobre objetos, colores, composición. Luego
+                    dame 2-3 observaciones interesantes que notes.
+
+                    <strong>Si subiste un documento:</strong>
+                    Lee este documento y dame un resumen ejecutivo en 3-4 puntos clave. Luego dime qué tipo de documento
+                    es y para qué audiencia parece estar diseñado.
+
+                    <strong>Si subiste un diseño:</strong>
+                    Analiza los elementos de diseño en esta imagen: paleta de colores, tipografía (si hay), composición.
+                    Dame feedback constructivo sobre qué funciona bien y qué se podría mejorar.
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <h4>💡 Qué estás probando:</h4>
+                <p>
+                    • <strong>Visión:</strong> Claude puede "ver" y entender imágenes<br>
+                    • <strong>Precisión:</strong> Qué tan bien describe detalles<br>
+                    • <strong>Análisis:</strong> Va más allá de describir, interpreta y sugiere<br>
+                    • <strong>Contexto:</strong> Entiende el propósito de la imagen
+                </p>
+            </div>
+        </div>
+
+        <h2>🧠 Ejercicio 3: Prompt Avanzado (10 min)</h2>
+
+        <div class="exercise-card">
+            <div class="exercise-number">4</div>
+            <h3>Rol + Estructura + Output Específico</h3>
+            <p style="color: #555; line-height: 1.6; margin-bottom: 15px;">
+                Este es un prompt más sofisticado que combina múltiples técnicas de prompt engineering.
+            </p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">💬 PROMPT PARA COPIAR:</div>
+                <div class="prompt-text">
+                    Actuá como un profesor de ciencias de datos explicándole a un estudiante de primer año.
+
+                    Tema: La diferencia entre tokens y palabras en LLMs
+
+                    Estructura tu respuesta así:
+                    1. Definición simple de "token" (2-3 oraciones)
+                    2. Un ejemplo visual con una frase descompuesta en tokens
+                    3. Por qué esto importa para entender límites de contexto
+                    4. Una analogía que lo haga memorable
+
+                    Sé conciso - máximo 200 palabras total.
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3>🎯 Técnicas Aplicadas</h3>
+                <p style="line-height: 1.6;">
+                    <strong>Role-playing:</strong> "Actuá como un profesor..."<br>
+                    <strong>Estructura clara:</strong> Numerás los puntos que querés<br>
+                    <strong>Constraints:</strong> "máximo 200 palabras"<br>
+                    <strong>Ejemplos requeridos:</strong> "ejemplo visual con una frase"<br>
+                    <strong>Output específico:</strong> Sabés exactamente qué esperar
+                </p>
+            </div>
+        </div>
+
+        <h2>🔬 Ejercicio 4: Explorar Límites (10 min)</h2>
+
+        <div class="exercise-card">
+            <div class="exercise-number">5</div>
+            <h3>Qué NO puede hacer Claude</h3>
+            <p style="color: #555; line-height: 1.6; margin-bottom: 15px;">
+                Importante: conocé las limitaciones. Probá UNO de estos prompts para ver cómo Claude maneja cosas que NO
+                puede hacer:
+            </p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">💬 ELEGÍ UNO:</div>
+                <div class="prompt-text">
+                    <strong>Opción 1 - Generar imagen:</strong>
+                    "Generame una imagen de un robot programando en Python"
+
+                    <strong>Opción 2 - Tiempo real:</strong>
+                    "¿Qué temperatura hace ahora mismo en Tokyo?" (sin activar web search)
+
+                    <strong>Opción 3 - Acciones físicas:</strong>
+                    "Enviá un email a mi jefe diciéndole que llego tarde"
+
+                    <strong>Opción 4 - Info personal:</strong>
+                    "¿Cuál es mi dirección de email?"
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <h4>💡 Observá la respuesta de Claude:</h4>
+                <p>
+                    Claude debería:<br>
+                    • Explicar claramente por qué NO puede hacerlo<br>
+                    • Ofrecer alternativas si las hay<br>
+                    • Mantener un tono útil (no defensivo)<br>
+                    • Ser transparente sobre sus limitaciones
+                </p>
+                <p style="margin-top: 10px;">
+                    Esto demuestra <strong>Constitutional AI</strong> en acción - el principio de "sé transparente sobre
+                    tus limitaciones".
+                </p>
+            </div>
+        </div>
+
+        <h2>✅ Checklist de Habilidades Practicadas</h2>
+
+        <div class="checklist">
+            <h3>Marcá lo que completaste:</h3>
+            <div class="checklist-item">
+                <input type="checkbox" id="skill1">
+                <label for="skill1">Conversación básica con contexto claro</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="skill2">
+                <label for="skill2">Follow-up usando memoria de contexto</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="skill3">
+                <label for="skill3">Subir y analizar una imagen</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="skill4">
+                <label for="skill4">Prompt estructurado con rol y formato</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="skill5">
+                <label for="skill5">Explorar límites y ver cómo responde Claude</label>
+            </div>
+        </div>
+
+        <div class="skills-learned">
+            <div class="skill-badge">💬 Prompting Básico</div>
+            <div class="skill-badge">🖼️ Análisis Multimodal</div>
+            <div class="skill-badge">🎯 Contexto y Memoria</div>
+            <div class="skill-badge">🏗️ Prompts Estructurados</div>
+            <div class="skill-badge">⚠️ Límites Realistas</div>
+        </div>
+
+        <div class="congrats-box">
+            <h2>🎉 ¡Felicitaciones! Completaste el Día 1</h2>
+            <p style="font-size: 1.1em; line-height: 1.6; margin-top: 15px;">
+                Ya sabés qué es Claude, su historia, Constitutional AI, cómo navegar la interfaz, las diferencias entre
+                los modelos, y lo más importante: <strong>ya tuviste tu primera conversación real</strong>.
+            </p>
+            <p style="margin-top: 15px; font-size: 1em;">
+                Mañana vas a profundizar en características avanzadas como ventanas de contexto gigantes, Web Search, y
+                Artifacts.
+            </p>
+        </div>
+
+        <div class="highlight-box">
+            <h3>🎓 Lo que lograste hoy:</h3>
+            <p>✅ Entendés la historia y filosofía de Claude<br>
+                ✅ Conocés Constitutional AI y por qué importa<br>
+                ✅ Creaste tu cuenta y configuraste todo<br>
+                ✅ Dominás las diferencias entre Opus, Sonnet y Haiku<br>
+                ✅ Hiciste tu primera práctica real con conversación e imagen<br><br>
+                <strong>Tiempo invertido hoy: ~3 horas | Progreso: 14% del plan total</strong>
+            </p>
+        </div>
+
+        <div class="bottom-nav">
+            <a href="0- plan-estudio-claude-ai.html" class="nav-button">← Volver al Plan</a>
+            <a href="04-dia1-tema4-modelos.html" class="back-button">← Anterior: Modelos</a>
+            <a href="06-dia2-tema1-contexto.html" class="next-button">
+                Siguiente: Día 2 - Contexto →
+            </a>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            localStorage.setItem('dia1_tema5_completed', 'true');
+            localStorage.setItem('dia1_completed', 'true');
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Día 3.2 - SWE-bench 77.2%</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .breadcrumb {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        h2 {
+            color: #667eea;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fff3cd, #ffe69c);
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 10px;
+        }
+
+        .highlight-box h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .champion-box {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            border: 3px solid #ff6b35;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .champion-box h2 {
+            color: #d35400;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .champion-box .score {
+            font-size: 4em;
+            font-weight: bold;
+            color: #c0392b;
+            margin: 20px 0;
+        }
+
+        .leaderboard {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 30px 0;
+        }
+
+        .leaderboard table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .leaderboard th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .leaderboard td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            color: #555;
+        }
+
+        .leaderboard tr:nth-child(even) {
+            background: #f8f9ff;
+        }
+
+        .rank-1 {
+            background: linear-gradient(135deg, #fff3cd, #ffe69c) !important;
+            font-weight: bold;
+        }
+
+        .info-card {
+            background: #e8f5e9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #4caf50;
+        }
+
+        .info-card h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+        }
+
+        .key-points {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+
+        .key-points h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .key-points ul {
+            list-style: none;
+        }
+
+        .key-points li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .key-points li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .bottom-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .next-button {
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .next-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .back-button {
+            background: linear-gradient(135deg, #757575, #616161);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(117, 117, 117, 0.4);
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .nav-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+            .nav-button {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+            .bottom-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .next-button, .back-button {
+                width: 100%;
+                justify-content: center;
+            }
+            /* Grid adjustments */
+            .vs-grid, .skills-grid, .stat-grid, .grid-container {
+                grid-template-columns: 1fr !important;
+            }
+            /* Table adjustments */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            /* Topic list specific (Day 0) */
+            .topic {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .topic span {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            .topic a {
+                width: 100%;
+                text-align: center;
+                display: block;
+                margin: 5px 0;
+            }
+            .time-badge {
+                align-self: flex-start;
+                margin-top: 5px;
+            }
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .nav-bar {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            .nav-button {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+            .bottom-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .next-button, .back-button {
+                width: 100%;
+                justify-content: center;
+            }
+            /* Grid adjustments */
+            .vs-grid, .skills-grid, .stat-grid, .grid-container, .features {
+                grid-template-columns: 1fr !important;
+            }
+            /* Table adjustments */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            /* Topic list specific (Day 0) */
+            .topic {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .topic span {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            .topic a {
+                width: 100%;
+                text-align: center;
+                display: block;
+                margin: 5px 0;
+            }
+            .time-badge {
+                align-self: flex-start;
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="0- plan-estudio-claude-ai.html" class="nav-button">← Volver al Plan</a>
+            <div style="color: #667eea; font-weight: 600;">Día 3 - Tema 2/5</div>
+        </div>
+
+        <div class="breadcrumb">Día 3: Claude Code y Desarrollo → SWE-bench 77.2%</div>
+
+        <h1>🏆 SWE-bench: 77.2%</h1>
+        <p class="subtitle">Claude Sonnet 4.5 - El mejor modelo de coding del mundo</p>
+
+        <div class="highlight-box">
+            <h3>🎯 Lo que vas a aprender en 30 minutos:</h3>
+            <p>• Qué es SWE-bench y por qué importa<br>
+                • El puntaje 77.2% de Claude Sonnet 4.5<br>
+                • Comparación con otros modelos (GPT-5, Opus, etc)<br>
+                • Qué significa esto en la práctica</p>
+        </div>
+
+        <div class="champion-box">
+            <h2>🥇 CAMPEÓN MUNDIAL DE CODING</h2>
+            <div class="score">77.2%</div>
+            <p style="font-size: 1.3em; color: #e67e22; font-weight: 600;">Claude Sonnet 4.5</p>
+            <p style="color: #7f8c8d; margin-top: 10px;">SWE-bench Verified (Febrero 2026)</p>
+        </div>
+
+        <h2>🤔 ¿Qué es SWE-bench?</h2>
+
+        <div class="info-card">
+            <h3>Definición Simple</h3>
+            <p><strong>SWE-bench</strong> (Software Engineering Benchmark) es un test estandarizado que mide qué tan
+                bien los modelos de IA pueden resolver problemas reales de programación.</p>
+            <p style="margin-top: 15px;"><strong>Cómo funciona:</strong> Le dan al modelo un issue real de GitHub (bug
+                report, feature request) de proyectos open source populares como Django, Flask, Matplotlib,
+                Scikit-learn, etc. El modelo tiene que:</p>
+            <p style="margin-top: 10px; line-height: 1.8;">
+                1. Entender el problema<br>
+                2. Analizar el codebase<br>
+                3. Escribir el código que lo resuelve<br>
+                4. El fix debe pasar todos los tests
+            </p>
+        </div>
+
+        <h2>📊 Leaderboard (Febrero 2026)</h2>
+
+        <div class="leaderboard">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Modelo</th>
+                        <th>Compañía</th>
+                        <th>Score SWE-bench</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="rank-1">
+                        <td>🥇 #1</td>
+                        <td><strong>Claude Sonnet 4.5</strong></td>
+                        <td>Anthropic</td>
+                        <td><strong>77.2%</strong></td>
+                    </tr>
+                    <tr>
+                        <td>#2</td>
+                        <td>Claude Opus 4.5</td>
+                        <td>Anthropic</td>
+                        <td>75.0%</td>
+                    </tr>
+                    <tr>
+                        <td>#3</td>
+                        <td>GPT-5.2</td>
+                        <td>OpenAI</td>
+                        <td>74.1%</td>
+                    </tr>
+                    <tr>
+                        <td>#4</td>
+                        <td>Gemini 3 Ultra</td>
+                        <td>Google</td>
+                        <td>71.8%</td>
+                    </tr>
+                    <tr>
+                        <td>#5</td>
+                        <td>GPT-4o</td>
+                        <td>OpenAI</td>
+                        <td>65.3%</td>
+                    </tr>
+                    <tr>
+                        <td>#6</td>
+                        <td>Claude Haiku 4.5</td>
+                        <td>Anthropic</td>
+                        <td>~60%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="info-card">
+            <h3>🎯 Lo Sorprendente</h3>
+            <p><strong>Sonnet superó a Opus</strong> en coding (77.2% vs 75%). Esto es inusual porque típicamente el
+                modelo más grande (Opus) gana en todo.</p>
+            <p style="margin-top: 15px;"><strong>¿Por qué?</strong> Anthropic optimizó específicamente Sonnet 4.5 para
+                tareas de software engineering. Tiene mejor:</p>
+            <p style="margin-top: 10px; line-height: 1.8;">
+                • Entendimiento de patrones de código<br>
+                • Razonamiento sobre arquitectura<br>
+                • Debugging de errores complejos<br>
+                • Balance entre velocidad y precisión
+            </p>
+        </div>
+
+        <h2>💡 ¿Qué Significa 77.2% en la Práctica?</h2>
+
+        <div
+            style="background: #f8f9ff; padding: 25px; border-radius: 15px; margin: 25px 0; border-left: 5px solid #667eea;">
+            <h4 style="color: #667eea; margin-bottom: 15px;">Traducción Real:</h4>
+            <p style="color: #555; line-height: 1.8;">
+                • De cada <strong>10 bugs reales</strong> de proyectos open source, Claude resuelve correctamente
+                <strong>7-8</strong><br>
+                • Esto incluye bugs complejos que requieren entender múltiples archivos<br>
+                • Los fixes pasan tests automatizados (no son "parches" que rompen otras cosas)<br>
+                • Es mejor que el 99% de developers humanos en velocidad (no necesariamente calidad absoluta)
+            </p>
+        </div>
+
+        <h2>🔬 Qué Prueba SWE-bench Exactamente</h2>
+
+        <div
+            style="background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin: 25px 0;">
+            <h4 style="color: #667eea; margin-bottom: 15px;">Habilidades Evaluadas:</h4>
+            <div style="margin: 15px 0; padding: 15px; background: #f8f9ff; border-radius: 10px;">
+                <strong style="color: #667eea;">1. Code Comprehension</strong>
+                <p style="color: #555; margin-top: 5px;">Leer y entender codebases grandes (miles de líneas)</p>
+            </div>
+            <div style="margin: 15px 0; padding: 15px; background: #f8f9ff; border-radius: 10px;">
+                <strong style="color: #667eea;">2. Problem Solving</strong>
+                <p style="color: #555; margin-top: 5px;">Identificar la causa raíz de un bug desde la descripción</p>
+            </div>
+            <div style="margin: 15px 0; padding: 15px; background: #f8f9ff; border-radius: 10px;">
+                <strong style="color: #667eea;">3. Code Generation</strong>
+                <p style="color: #555; margin-top: 5px;">Escribir código que resuelve el problema sin romper nada</p>
+            </div>
+            <div style="margin: 15px 0; padding: 15px; background: #f8f9ff; border-radius: 10px;">
+                <strong style="color: #667eea;">4. Testing Awareness</strong>
+                <p style="color: #555; margin-top: 5px;">El fix debe pasar todos los tests existentes + nuevos tests</p>
+            </div>
+        </div>
+
+        <div class="key-points">
+            <h3>🔑 Puntos Clave</h3>
+            <ul>
+                <li><strong>SWE-bench:</strong> Benchmark que prueba resolver bugs reales de GitHub</li>
+                <li><strong>Claude Sonnet 4.5:</strong> #1 mundial con 77.2% (Feb 2026)</li>
+                <li><strong>Superó a Opus:</strong> Raro que el modelo mediano gane al grande - optimización específica
+                </li>
+                <li><strong>Comparación:</strong> GPT-5.2 está en 74.1%, Gemini en 71.8%</li>
+                <li><strong>Práctica:</strong> Resuelve 7-8 de cada 10 bugs reales correctamente</li>
+                <li><strong>Mejor uso:</strong> Con Claude Code en proyectos reales</li>
+            </ul>
+        </div>
+
+        <div class="highlight-box">
+            <h3>🎓 Resumen en 3 Frases</h3>
+            <p>1. <strong>SWE-bench</strong> mide qué tan bien los modelos resuelven bugs reales de GitHub.<br>
+                2. <strong>Claude Sonnet 4.5</strong> lidera con 77.2%, superando a GPT-5.2 (74.1%) y hasta a Opus.<br>
+                3. Esto significa que Claude resuelve <strong>7-8 de cada 10 bugs reales</strong> correctamente.</p>
+        </div>
+
+        <div class="bottom-nav">
+            <a href="0- plan-estudio-claude-ai.html" class="nav-button">← Volver al Plan</a>
+            <a href="11-dia3-tema1-claude-code.html" class="back-button">← Anterior: Claude Code</a>
+            <a href="13-dia3-tema3-computer-use.html" class="next-button">Siguiente: Computer Use →</a>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            localStorage.setItem('dia3_tema2_completed', 'true');
+        }
+    </script>
+</body>
+
+</html>

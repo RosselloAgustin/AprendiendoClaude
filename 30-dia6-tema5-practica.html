@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Día 6.5 - Práctica Comparativa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 2.5em;
+        }
+
+        h2 {
+            color: #667eea;
+            margin-top: 35px;
+            margin-bottom: 20px;
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fff3cd, #ffe69c);
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 10px;
+        }
+
+        .exercise {
+            background: #e3f2fd;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-left: 5px solid #2196f3;
+        }
+
+        .exercise h3 {
+            color: #1565c0;
+            margin-bottom: 15px;
+        }
+
+        .congrats {
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .bottom-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .next-button,
+        .back-button {
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .next-button {
+            background: linear-gradient(135deg, #4caf50, #45a049);
+        }
+
+        .back-button {
+            background: linear-gradient(135deg, #757575, #616161);
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .nav-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+            .nav-button {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+            .bottom-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .next-button, .back-button {
+                width: 100%;
+                justify-content: center;
+            }
+            /* Grid adjustments */
+            .vs-grid, .skills-grid, .stat-grid, .grid-container {
+                grid-template-columns: 1fr !important;
+            }
+            /* Table adjustments */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            /* Topic list specific (Day 0) */
+            .topic {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .topic span {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            .topic a {
+                width: 100%;
+                text-align: center;
+                display: block;
+                margin: 5px 0;
+            }
+            .time-badge {
+                align-self: flex-start;
+                margin-top: 5px;
+            }
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .nav-bar {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            .nav-button {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+            .bottom-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .next-button, .back-button {
+                width: 100%;
+                justify-content: center;
+            }
+            /* Grid adjustments */
+            .vs-grid, .skills-grid, .stat-grid, .grid-container, .features {
+                grid-template-columns: 1fr !important;
+            }
+            /* Table adjustments */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            /* Topic list specific (Day 0) */
+            .topic {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .topic span {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            .topic a {
+                width: 100%;
+                text-align: center;
+                display: block;
+                margin: 5px 0;
+            }
+            .time-badge {
+                align-self: flex-start;
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="0- plan-estudio-claude-ai.html" class="nav-button">← Volver al Plan</a>
+            <div style="color: #667eea; font-weight: 600;">Día 6 - Tema 5/5</div>
+        </div>
+
+        <h1>🧪 Práctica Comparativa</h1>
+        <p style="color: #666; font-size: 1.2em; margin-bottom: 30px; font-style: italic;">Experimenta las diferencias
+            tú mismo</p>
+
+        <div class="highlight-box">
+            <h3 style="color: #856404;">🎯 Ejercicio (30 min):</h3>
+            <p>Compara Claude vs ChatGPT/Gemini en la misma tarea<br>
+                Evalúa calidad, velocidad, precisión<br>
+                Decide cuál prefieres para qué</p>
+        </div>
+
+        <h2>📝 Ejercicio: Test Comparativo</h2>
+
+        <div class="exercise">
+            <h3>Tarea 1: Código (10 min)</h3>
+            <p style="color: #555; line-height: 1.8;">
+                <strong>Prompt:</strong> "Escribe un script Python que lea un CSV, limpie datos nulos, calcule
+                estadísticas descriptivas, y genere un gráfico con matplotlib"<br><br>
+
+                <strong>Prueba en:</strong><br>
+                1. Claude (claude.ai)<br>
+                2. ChatGPT (chat.openai.com)<br><br>
+
+                <strong>Compara:</strong><br>
+                • ¿Cuál genera código que funciona sin editar?<br>
+                • ¿Cuál tiene mejor estructura y comments?<br>
+                • ¿Cuál maneja edge cases mejor?
+            </p>
+        </div>
+
+        <div class="exercise">
+            <h3>Tarea 2: Análisis (10 min)</h3>
+            <p style="color: #555; line-height: 1.8;">
+                <strong>Prompt:</strong> "Analiza los últimos earnings de Tesla (busca el 10-K) y dame los 5 insights
+                principales"<br><br>
+
+                <strong>Compara:</strong><br>
+                • ¿Cuál usa Web Search mejor?<br>
+                • ¿Cuál da insights más profundos?<br>
+                • ¿Cuál es más preciso en números?
+            </p>
+        </div>
+
+        <div class="exercise">
+            <h3>Tarea 3: Creatividad (10 min)</h3>
+            <p style="color: #555; line-height: 1.8;">
+                <strong>Prompt:</strong> "Genera un logo para una startup de IA llamada 'NeuralFlow'"<br><br>
+
+                <strong>Resultado:</strong><br>
+                • Claude: NO puede generar imágenes<br>
+                • ChatGPT: Genera con DALL-E<br><br>
+
+                <strong>Conclusión:</strong> Para imágenes, ChatGPT gana siempre.
+            </p>
+        </div>
+
+        <div class="congrats">
+            <h2 style="color: white; margin-bottom: 15px;">🎉 ¡Completaste el Día 6!</h2>
+            <p style="font-size: 1.1em; line-height: 1.8;">
+                Ahora tenés claridad sobre:<br>
+                • Diferencias entre Claude, ChatGPT y Gemini<br>
+                • Fortalezas y debilidades de cada uno<br>
+                • Cuándo usar cuál<br>
+                • Experiencia práctica comparando<br><br>
+                <strong>Progreso: 86% del curso (6/7 días)</strong>
+            </p>
+        </div>
+
+        <div class="highlight-box">
+            <h3>🎓 Resumen Día 6</h3>
+            <p><strong>Claude vs ChatGPT:</strong> Coding vs Imágenes<br>
+                <strong>Claude vs Gemini:</strong> Precisión vs Contexto masivo<br>
+                <strong>Fortalezas Claude:</strong> 77.2% coding, 1M tokens, safety<br>
+                <strong>Debilidades:</strong> Sin imágenes, ecosystem pequeño<br>
+                <strong>Estrategia:</strong> Usa múltiples según la tarea
+            </p>
+        </div>
+
+        <div class="bottom-nav">
+            <a href="0- plan-estudio-claude-ai.html" class="nav-button">← Volver al Plan</a>
+            <a href="29-dia6-tema4-cuando-usar.html" class="back-button">← Anterior: Cuándo Usar</a>
+            <a href="31-dia7-tema1-futuro.html" class="next-button">Siguiente: Día 7 - Futuro →</a>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            localStorage.setItem('dia6_completed', 'true');
+        }
+    </script>
+</body>
+
+</html>

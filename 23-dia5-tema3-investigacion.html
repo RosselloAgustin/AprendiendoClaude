@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Día 5.3 - Investigación Académica</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 2.5em;
+        }
+
+        h2 {
+            color: #667eea;
+            margin-top: 35px;
+            margin-bottom: 20px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fff3cd, #ffe69c);
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 10px;
+        }
+
+        .use-case {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #667eea;
+        }
+
+        .prompt-box {
+            background: white;
+            border: 2px dashed #667eea;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            color: #333;
+            font-size: 0.9em;
+        }
+
+        .case-study {
+            background: #e8f5e9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #4caf50;
+        }
+
+        .bottom-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .next-button,
+        .back-button {
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .next-button {
+            background: linear-gradient(135deg, #4caf50, #45a049);
+        }
+
+        .back-button {
+            background: linear-gradient(135deg, #757575, #616161);
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .nav-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+            .nav-button {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+            .bottom-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .next-button, .back-button {
+                width: 100%;
+                justify-content: center;
+            }
+            /* Grid adjustments */
+            .vs-grid, .skills-grid, .stat-grid, .grid-container {
+                grid-template-columns: 1fr !important;
+            }
+            /* Table adjustments */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            /* Topic list specific (Day 0) */
+            .topic {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .topic span {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            .topic a {
+                width: 100%;
+                text-align: center;
+                display: block;
+                margin: 5px 0;
+            }
+            .time-badge {
+                align-self: flex-start;
+                margin-top: 5px;
+            }
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .nav-bar {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            .nav-button {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+            .bottom-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .next-button, .back-button {
+                width: 100%;
+                justify-content: center;
+            }
+            /* Grid adjustments */
+            .vs-grid, .skills-grid, .stat-grid, .grid-container, .features {
+                grid-template-columns: 1fr !important;
+            }
+            /* Table adjustments */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            /* Topic list specific (Day 0) */
+            .topic {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .topic span {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            .topic a {
+                width: 100%;
+                text-align: center;
+                display: block;
+                margin: 5px 0;
+            }
+            .time-badge {
+                align-self: flex-start;
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="0- plan-estudio-claude-ai.html" class="nav-button">← Volver al Plan</a>
+            <div style="color: #667eea; font-weight: 600;">Día 5 - Tema 3/5</div>
+        </div>
+
+        <h1>🔬 Investigación Académica con Claude</h1>
+        <p style="color: #666; font-size: 1.2em; margin-bottom: 30px; font-style: italic;">Acelera tu research con IA
+        </p>
+
+        <div class="highlight-box">
+            <h3 style="color: #856404;">🎯 En 35 minutos:</h3>
+            <p>• Cómo hacer literature reviews efectivos<br>
+                • Análisis de metodologías y resultados<br>
+                • Identificar gaps de investigación<br>
+                • Caso real: Stanford CRISPR study</p>
+        </div>
+
+        <h2>📚 Literature Reviews</h2>
+
+        <div class="use-case">
+            <h3 style="color: #667eea; margin-bottom: 15px;">Proceso con Claude</h3>
+            <p style="color: #555; line-height: 1.8;">
+                <strong>Paso 1:</strong> Busca papers con Web Search ("últimos papers sobre [tema] en arXiv/PubMed")<br>
+                <strong>Paso 2:</strong> Sube PDFs de 10-20 papers<br>
+                <strong>Paso 3:</strong> Pídele síntesis temática<br>
+                <strong>Paso 4:</strong> Análisis comparativo de metodologías<br>
+                <strong>Paso 5:</strong> Identifica consensus vs controversias
+            </p>
+        </div>
+
+        <div class="prompt-box">
+            He subido 15 papers sobre quantum computing error correction.
+
+            Tareas:
+            1. Agrúpalos por approach (surface codes, topological, etc)
+            2. Para cada grupo, resume la metodología principal
+            3. Compara los error rates reportados
+            4. ¿Qué approach parece más prometedor según resultados?
+            5. ¿Qué limitaciones reportan todos los papers?
+            6. Identifica 3 gaps que ninguno aborda
+
+            Formato: Paper académico, con tabla comparativa.
+        </div>
+
+        <h2>🧪 Análisis de Metodologías</h2>
+
+        <div class="use-case">
+            <h3 style="color: #667eea; margin-bottom: 15px;">Comparación Profunda</h3>
+            <p style="color: #555; line-height: 1.8;">
+                Claude puede:<br>
+                • Identificar similitudes/diferencias en experimental design<br>
+                • Detectar sesgos metodológicos<br>
+                • Comparar sample sizes y statistical power<br>
+                • Evaluar validez interna/externa<br>
+                • Sugerir mejoras a metodologías
+            </p>
+        </div>
+
+        <h2>🎯 Identificar Research Gaps</h2>
+
+        <div class="prompt-box">
+            Basándome en estos 20 papers sobre [TOPIC]:
+
+            Identifica gaps de investigación considerando:
+            1. Poblaciones no estudiadas
+            2. Condiciones experimentales no exploradas
+            3. Métodos alternativos no probados
+            4. Contradicciones sin resolver
+            5. Limitaciones que todos reportan pero nadie soluciona
+
+            Para cada gap:
+            - Describe el gap específicamente
+            - Por qué es importante estudiarlo
+            - Qué metodología podría usarse
+            - Dificultad estimada (baja/media/alta)
+
+            Prioriza por impacto potencial.
+        </div>
+
+        <h2>📊 Caso Real: Stanford CRISPR Study (2025)</h2>
+
+        <div class="case-study">
+            <h3 style="color: #2e7d32; margin-bottom: 15px;">Ejemplo Documentado</h3>
+            <p style="line-height: 1.8; color: #555;">
+                <strong>Context:</strong> Investigadores de Stanford necesitaban hacer literature review de CRISPR gene
+                editing para identificar direcciones de investigación no exploradas.<br><br>
+
+                <strong>Proceso:</strong><br>
+                1. Identificaron 200 papers relevantes usando Web Search + Google Scholar<br>
+                2. Subieron PDFs a Claude (grupos de 20-30 por sesión)<br>
+                3. Claude generó matriz comparativa de metodologías<br>
+                4. Identificó 15 gaps potenciales de investigación<br>
+                5. Equipo priorizó los 3 más prometedores<br><br>
+
+                <strong>Resultado:</strong> Paper publicado en Nature Methods explorando uno de los gaps identificados
+                por Claude - nuevo método de delivery que ningún paper previo había intentado.<br><br>
+
+                <strong>Tiempo ahorrado:</strong> ~6 semanas de literatura review manual → 3 días con Claude
+            </p>
+        </div>
+
+        <h2>💡 Best Practices</h2>
+
+        <div
+            style="background: #e3f2fd; padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 5px solid #2196f3;">
+            <h3 style="color: #1565c0; margin-bottom: 15px;">Tips para Research</h3>
+            <p style="line-height: 1.8; color: #555;">
+                <strong>1. Usa Extended Thinking</strong> para análisis profundo de metodologías complejas<br>
+                <strong>2. Web Search primero</strong> para encontrar papers recientes<br>
+                <strong>3. Batches de 15-20 papers</strong> por sesión (límite de contexto)<br>
+                <strong>4. Pídele tablas comparativas</strong> - son fáciles de revisar<br>
+                <strong>5. Verifica siempre</strong> - Claude puede malinterpretar datos técnicos<br>
+                <strong>6. Exporta a .docx</strong> para incluir en tu paper
+            </p>
+        </div>
+
+        <div class="highlight-box">
+            <h3>🎓 Resumen</h3>
+            <p><strong>Usos:</strong> Literature reviews, análisis metodológico, identificar gaps<br>
+                <strong>Proceso:</strong> Web Search → Upload PDFs → Síntesis → Comparación → Gaps<br>
+                <strong>Caso real:</strong> Stanford ahorró 6 semanas en CRISPR review<br>
+                <strong>Tip:</strong> Extended Thinking para análisis complejos
+            </p>
+        </div>
+
+        <div class="bottom-nav">
+            <a href="0- plan-estudio-claude-ai.html" class="nav-button">← Volver al Plan</a>
+            <a href="22-dia5-tema2-contenido.html" class="back-button">← Anterior: Contenido</a>
+            <a href="24-dia5-tema4-casos-empresas.html" class="next-button">Siguiente: Casos Empresas →</a>
+        </div>
+    </div>
+</body>
+
+</html>

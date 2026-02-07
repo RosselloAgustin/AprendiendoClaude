@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Día 5.1 - Análisis de Documentos Largos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 2.5em;
+        }
+
+        h2 {
+            color: #667eea;
+            margin-top: 35px;
+            margin-bottom: 20px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fff3cd, #ffe69c);
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 10px;
+        }
+
+        .use-case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .use-case-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #667eea;
+        }
+
+        .use-case-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .example-box {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-left: 5px solid #667eea;
+        }
+
+        .prompt-box {
+            background: white;
+            border: 2px dashed #667eea;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            color: #333;
+        }
+
+        .workflow {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 30px 0;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 10px;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .bottom-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .next-button {
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .back-button {
+            background: linear-gradient(135deg, #757575, #616161);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .nav-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+            .nav-button {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+            .bottom-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .next-button, .back-button {
+                width: 100%;
+                justify-content: center;
+            }
+            /* Grid adjustments */
+            .vs-grid, .skills-grid, .stat-grid, .grid-container {
+                grid-template-columns: 1fr !important;
+            }
+            /* Table adjustments */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            /* Topic list specific (Day 0) */
+            .topic {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .topic span {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            .topic a {
+                width: 100%;
+                text-align: center;
+                display: block;
+                margin: 5px 0;
+            }
+            .time-badge {
+                align-self: flex-start;
+                margin-top: 5px;
+            }
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .nav-bar {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            .nav-button {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+            .bottom-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .next-button, .back-button {
+                width: 100%;
+                justify-content: center;
+            }
+            /* Grid adjustments */
+            .vs-grid, .skills-grid, .stat-grid, .grid-container, .features {
+                grid-template-columns: 1fr !important;
+            }
+            /* Table adjustments */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            /* Topic list specific (Day 0) */
+            .topic {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .topic span {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            .topic a {
+                width: 100%;
+                text-align: center;
+                display: block;
+                margin: 5px 0;
+            }
+            .time-badge {
+                align-self: flex-start;
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="0- plan-estudio-claude-ai.html" class="nav-button">← Volver al Plan</a>
+            <div style="color: #667eea; font-weight: 600;">Día 5 - Tema 1/5</div>
+        </div>
+
+        <h1>📄 Análisis de Documentos Largos</h1>
+        <p style="color: #666; font-size: 1.2em; margin-bottom: 30px; font-style: italic;">Procesa cientos de páginas
+            con facilidad</p>
+
+        <div class="highlight-box">
+            <h3 style="color: #856404;">🎯 En 35 minutos:</h3>
+            <p>• Qué puede analizar Claude (contratos, papers, reportes)<br>
+                • Workflow óptimo para documentos largos<br>
+                • Prompts efectivos para análisis<br>
+                • Ejercicio práctico con documento real</p>
+        </div>
+
+        <h2>📊 Capacidades con Documentos Largos</h2>
+
+        <div
+            style="background: #e8f5e9; padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 5px solid #4caf50;">
+            <h3 style="color: #2e7d32; margin-bottom: 15px;">¿Qué puede procesar Claude?</h3>
+            <p style="line-height: 1.8; color: #555;">
+                <strong>Ventana de contexto:</strong><br>
+                • Sonnet 4.5: 200K tokens (~400 páginas en español)<br>
+                • Opus 4.5: 1M tokens (~2,000 páginas)<br><br>
+
+                <strong>Formatos soportados:</strong><br>
+                • PDFs (texto o escaneados con OCR)<br>
+                • Word docs (.docx)<br>
+                • Texto plano (.txt, .md)<br>
+                • Múltiples archivos simultáneamente
+            </p>
+        </div>
+
+        <h2>💼 Casos de Uso Profesionales</h2>
+
+        <div class="use-case-grid">
+            <div class="use-case-card">
+                <h3>⚖️ Contratos Legales</h3>
+                <p style="color: #555; line-height: 1.6;">
+                    <strong>Input:</strong> Contrato de 100+ páginas<br>
+                    <strong>Output:</strong> Resumen ejecutivo, cláusulas clave, riesgos identificados, comparación con
+                    estándares<br>
+                    <strong>Ahorro:</strong> 4-6 horas de lectura manual
+                </p>
+            </div>
+
+            <div class="use-case-card">
+                <h3>📊 Reportes Financieros</h3>
+                <p style="color: #555; line-height: 1.6;">
+                    <strong>Input:</strong> Annual report de empresa pública<br>
+                    <strong>Output:</strong> KPIs extraídos, tendencias identificadas, comparación año a año, red
+                    flags<br>
+                    <strong>Ahorro:</strong> 3-5 horas de análisis
+                </p>
+            </div>
+
+            <div class="use-case-card">
+                <h3>🔬 Papers Académicos</h3>
+                <p style="color: #555; line-height: 1.6;">
+                    <strong>Input:</strong> 20+ papers relacionados<br>
+                    <strong>Output:</strong> Literature review, metodologías comparadas, gaps de investigación<br>
+                    <strong>Ahorro:</strong> Semanas de lectura
+                </p>
+            </div>
+
+            <div class="use-case-card">
+                <h3>📋 RFPs y Propuestas</h3>
+                <p style="color: #555; line-height: 1.6;">
+                    <strong>Input:</strong> Request for Proposal de 50 páginas<br>
+                    <strong>Output:</strong> Requisitos extraídos, checklist de compliance, propuesta draft<br>
+                    <strong>Ahorro:</strong> 2-3 días de trabajo
+                </p>
+            </div>
+
+            <div class="use-case-card">
+                <h3>📚 Libros Completos</h3>
+                <p style="color: #555; line-height: 1.6;">
+                    <strong>Input:</strong> Libro técnico o business<br>
+                    <strong>Output:</strong> Resumen por capítulo, conceptos clave, actionable insights<br>
+                    <strong>Ahorro:</strong> 10-20 horas de lectura
+                </p>
+            </div>
+
+            <div class="use-case-card">
+                <h3>🏛️ Policies y Regulaciones</h3>
+                <p style="color: #555; line-height: 1.6;">
+                    <strong>Input:</strong> Documentos gubernamentales o corporate policies<br>
+                    <strong>Output:</strong> Cambios vs versión anterior, impacto operacional, compliance gaps<br>
+                    <strong>Ahorro:</strong> Horas de análisis comparativo
+                </p>
+            </div>
+        </div>
+
+        <h2>🔄 Workflow Óptimo</h2>
+
+        <div class="workflow">
+            <h3 style="color: #667eea; margin-bottom: 20px;">Proceso Paso a Paso</h3>
+
+            <div class="step">
+                <div class="step-number">1</div>
+                <div>
+                    <h4 style="color: #667eea; margin-bottom: 8px;">Upload del Documento</h4>
+                    <p style="color: #555; line-height: 1.6;">
+                        Subí el PDF o .docx directamente a Claude. Si son múltiples docs, subí todos juntos. Claude
+                        puede procesar hasta la ventana de contexto.
+                    </p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <div>
+                    <h4 style="color: #667eea; margin-bottom: 8px;">Prompt Inicial General</h4>
+                    <p style="color: #555; line-height: 1.6;">
+                        Empezá con un overview: "Resume este contrato en 5 puntos clave" o "¿De qué trata este
+                        documento?"
+                    </p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <div>
+                    <h4 style="color: #667eea; margin-bottom: 8px;">Preguntas Específicas</h4>
+                    <p style="color: #555; line-height: 1.6;">
+                        Luego hacé drill-down: "¿Qué dice sobre X?", "Compara las secciones Y y Z", "Identifica riesgos
+                        en la cláusula de terminación"
+                    </p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <div>
+                    <h4 style="color: #667eea; margin-bottom: 8px;">Análisis Comparativo</h4>
+                    <p style="color: #555; line-height: 1.6;">
+                        Si tenés múltiples docs: "Compara estos 3 contratos y dame una tabla con diferencias en términos
+                        de pago, SLA y garantías"
+                    </p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">5</div>
+                <div>
+                    <h4 style="color: #667eea; margin-bottom: 8px;">Output Estructurado</h4>
+                    <p style="color: #555; line-height: 1.6;">
+                        Pedí el formato que necesitás: "Dame esto en formato tabla", "Crea un documento Word con el
+                        análisis", "Exporta como bullet points"
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <h2>💬 Prompts Efectivos</h2>
+
+        <div class="example-box">
+            <h4>Ejemplo 1: Contrato Legal</h4>
+            <div class="prompt-box">
+                He subido un contrato de servicio de 80 páginas.
+
+                Por favor:
+                1. Resume las obligaciones de cada parte en máximo 5 bullets por parte
+                2. Identifica cláusulas que podrían ser problemáticas o riesgosas
+                3. Extrae todos los plazos y deadlines mencionados
+                4. Compara los términos de pago con estándares de industria
+
+                Sé específico y cita números de página.
+            </div>
+        </div>
+
+        <div class="example-box">
+            <h4>Ejemplo 2: Paper Académico</h4>
+            <div class="prompt-box">
+                He subido 10 papers sobre machine learning interpretability.
+
+                Tareas:
+                1. Crea una tabla comparando las metodologías de cada paper
+                2. Identifica qué approaches son más prometedores según los resultados
+                3. ¿Qué gaps de investigación existen que ningún paper aborda?
+                4. Dame 3 ideas de investigación futura basadas en estos papers
+
+                Formato: Markdown con secciones claras.
+            </div>
+        </div>
+
+        <div class="example-box">
+            <h4>Ejemplo 3: Reporte Financiero</h4>
+            <div class="prompt-box">
+                Analiza este annual report de Tesla (200 páginas).
+
+                Extrae:
+                1. Revenue growth YoY (últimos 3 años)
+                2. Principales riesgos mencionados en Risk Factors
+                3. Planes de expansión y CAPEX proyectado
+                4. Cambios en management o board
+                5. ¿Hay alguna "red flag" financiera?
+
+                Dame un executive summary de 1 página al final.
+            </div>
+        </div>
+
+        <h2>🎯 Ejercicio Práctico</h2>
+
+        <div
+            style="background: #e3f2fd; padding: 25px; border-radius: 15px; margin: 25px 0; border-left: 5px solid #2196f3;">
+            <h3 style="color: #1565c0; margin-bottom: 15px;">Práctica (30 min)</h3>
+            <p style="line-height: 1.8; color: #555;">
+                <strong>Opción 1:</strong> Buscá un PDF de 20+ páginas (puede ser un paper, contrato de ejemplo, o
+                reporte público)<br><br>
+
+                <strong>Opción 2:</strong> Usa este documento de ejemplo: cualquier annual report de empresa pública
+                (busca "[Empresa] 10-K" en Google)<br><br>
+
+                <strong>Tu tarea:</strong><br>
+                1. Subí el documento a Claude<br>
+                2. Pedí un resumen ejecutivo<br>
+                3. Hacé 3 preguntas específicas sobre el contenido<br>
+                4. Pedí un análisis comparativo de 2 secciones<br>
+                5. Exportá el análisis en formato que prefieras<br><br>
+
+                <strong>Meta:</strong> Familiarizarte con el workflow de documentos largos
+            </p>
+        </div>
+
+        <div class="highlight-box">
+            <h3>🎓 Resumen</h3>
+            <p><strong>Capacidad:</strong> 200K-1M tokens (400-2000 páginas)<br>
+                <strong>Mejores usos:</strong> Contratos, reportes, papers, libros, policies<br>
+                <strong>Workflow:</strong> Upload → Overview → Drill-down → Comparación → Output<br>
+                <strong>Tip:</strong> Pedí citas de página para verificar información
+            </p>
+        </div>
+
+        <div class="bottom-nav">
+            <a href="0- plan-estudio-claude-ai.html" class="nav-button">← Volver al Plan</a>
+            <a href="20-dia4-tema5-decision.html" class="back-button">← Anterior: Día 4 - Decisión</a>
+            <a href="22-dia5-tema2-contenido.html" class="next-button">Siguiente: Creación de Contenido →</a>
+        </div>
+    </div>
+</body>
+
+</html>

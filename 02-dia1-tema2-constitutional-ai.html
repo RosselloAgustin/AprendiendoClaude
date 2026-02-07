@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Día 1.2 - Constitutional AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .breadcrumb {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        h2 {
+            color: #667eea;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fff3cd, #ffe69c);
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 10px;
+        }
+
+        .highlight-box h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .info-card {
+            background: #e8f5e9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #4caf50;
+        }
+
+        .info-card h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .comparison-card {
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .old-way {
+            background: #ffebee;
+            border-top: 4px solid #f44336;
+        }
+
+        .new-way {
+            background: #e8f5e9;
+            border-top: 4px solid #4caf50;
+        }
+
+        .comparison-card h4 {
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .old-way h4 {
+            color: #c62828;
+        }
+
+        .new-way h4 {
+            color: #2e7d32;
+        }
+
+        .comparison-card p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        .principle-box {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .principle-box:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .principle-box h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .principle-box p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .example {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #2196f3;
+        }
+
+        .example h4 {
+            color: #1565c0;
+            margin-bottom: 10px;
+        }
+
+        .example p {
+            color: #0d47a1;
+            line-height: 1.6;
+        }
+
+        .process-flow {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 30px 0;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9ff;
+            border-radius: 10px;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex-grow: 1;
+        }
+
+        .step-content h4 {
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .step-content p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .key-points {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+
+        .key-points h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .key-points ul {
+            list-style: none;
+        }
+
+        .key-points li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .key-points li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .quote {
+            background: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 20px;
+            margin: 25px 0;
+            font-style: italic;
+            border-radius: 10px;
+        }
+
+        .quote p {
+            color: #1565c0;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .warning-box {
+            background: #fff3e0;
+            border-left: 5px solid #ff9800;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+        }
+
+        .warning-box h4 {
+            color: #e65100;
+            margin-bottom: 10px;
+        }
+
+        .warning-box p {
+            color: #e65100;
+            line-height: 1.6;
+        }
+
+        .bottom-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .next-button {
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .next-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .back-button {
+            background: linear-gradient(135deg, #757575, #616161);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(117, 117, 117, 0.4);
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .nav-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+            .nav-button {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+            .bottom-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .next-button, .back-button {
+                width: 100%;
+                justify-content: center;
+            }
+            /* Grid adjustments */
+            .vs-grid, .skills-grid, .stat-grid, .grid-container {
+                grid-template-columns: 1fr !important;
+            }
+            /* Table adjustments */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            /* Topic list specific (Day 0) */
+            .topic {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .topic span {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            .topic a {
+                width: 100%;
+                text-align: center;
+                display: block;
+                margin: 5px 0;
+            }
+            .time-badge {
+                align-self: flex-start;
+                margin-top: 5px;
+            }
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .nav-bar {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            .nav-button {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+            .bottom-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .next-button, .back-button {
+                width: 100%;
+                justify-content: center;
+            }
+            /* Grid adjustments */
+            .vs-grid, .skills-grid, .stat-grid, .grid-container, .features {
+                grid-template-columns: 1fr !important;
+            }
+            /* Table adjustments */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            /* Topic list specific (Day 0) */
+            .topic {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .topic span {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            .topic a {
+                width: 100%;
+                text-align: center;
+                display: block;
+                margin: 5px 0;
+            }
+            .time-badge {
+                align-self: flex-start;
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="0- plan-estudio-claude-ai.html" class="nav-button">← Volver al Plan</a>
+            <div style="color: #667eea; font-weight: 600;">Día 1 - Tema 2/5</div>
+        </div>
+
+        <div class="breadcrumb">
+            Día 1: Fundamentos → Constitutional AI
+        </div>
+
+        <h1>⚖️ Constitutional AI</h1>
+        <p class="subtitle">El cerebro ético que hace a Claude diferente</p>
+
+        <div class="highlight-box">
+            <h3>🎯 Lo que vas a aprender en 45 minutos:</h3>
+            <p>• Qué es Constitutional AI (CAI) y por qué es revolucionario<br>
+                • Cómo funciona vs el método tradicional (RLHF)<br>
+                • La "Constitución" de Claude: principios éticos reales<br>
+                • Por qué hace a Claude más seguro y confiable</p>
+        </div>
+
+        <h2>🤔 El Problema: ¿Cómo hacer IA que no sea tóxica?</h2>
+
+        <div class="info-card">
+            <h3>El Desafío Original</h3>
+            <p>Los LLMs (Large Language Models) son entrenados con MILLONES de textos de internet. El problema: internet
+                está lleno de contenido tóxico, sesgado, ofensivo y falso. Si entrenas una IA solo con esos datos, vas a
+                obtener una IA tóxica.</p>
+            <p style="margin-top: 10px;"><strong>Solución tradicional:</strong> RLHF (Reinforcement Learning from Human
+                Feedback) - humanos revisan miles de respuestas y dicen "esto está bien" o "esto está mal". El modelo
+                aprende de ese feedback.</p>
+        </div>
+
+        <div class="comparison">
+            <div class="comparison-card old-way">
+                <h4>❌ Problema con RLHF</h4>
+                <p><strong>Depende 100% de humanos:</strong></p>
+                <p style="margin-top: 10px;">
+                    • Miles de personas revisando respuestas (caro, lento)<br>
+                    • Sesgos de los revisores se transfieren al modelo<br>
+                    • No hay "principios" claros, solo "esto me parece bien"<br>
+                    • Difícil de escalar<br>
+                    • No es transparente (nadie sabe exactamente qué aprendió el modelo)
+                </p>
+            </div>
+            <div class="comparison-card new-way">
+                <h4>✅ Solución: Constitutional AI</h4>
+                <p><strong>Principios + Auto-crítica:</strong></p>
+                <p style="margin-top: 10px;">
+                    • El modelo tiene una "constitución" escrita (principios éticos)<br>
+                    • Claude se critica a SÍ MISMO usando esos principios<br>
+                    • Más transparente (sabes QUÉ principios sigue)<br>
+                    • Escalable (no necesitas miles de revisores)<br>
+                    • Consistente en diferentes idiomas y culturas
+                </p>
+            </div>
+        </div>
+
+        <h2>🏛️ ¿Qué es Constitutional AI?</h2>
+
+        <div class="quote">
+            <p>"En lugar de enseñarle a la IA 'esto está bien, esto está mal' miles de veces, le damos una constitución
+                que dice 'estos son tus principios, úsalos para juzgar tus propias respuestas'."</p>
+            <p style="text-align: right; margin-top: 10px; font-size: 0.9em;">— Concepto de Anthropic</p>
+        </div>
+
+        <p style="color: #555; line-height: 1.8; margin: 20px 0;">
+            Constitutional AI es un método de entrenamiento donde el modelo aprende a seguir un conjunto de
+            <strong>principios éticos escritos</strong> (la "constitución"). En lugar de depender exclusivamente de
+            humanos diciéndole qué hacer, Claude aprende a:
+        </p>
+
+        <div class="process-flow">
+            <h3 style="color: #667eea; margin-bottom: 20px;">🔄 Cómo Funciona CAI (Paso a Paso)</h3>
+
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h4>Generar respuesta inicial</h4>
+                    <p>Claude genera una respuesta a una pregunta (esta respuesta puede ser problemática)</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h4>Auto-crítica usando la Constitución</h4>
+                    <p>Claude lee su propia respuesta y se pregunta: "¿Esto viola alguno de mis principios
+                        constitucionales?" Por ejemplo: "¿Es esta respuesta dañina? ¿Es engañosa? ¿Es respetuosa?"</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h4>Generar respuesta mejorada</h4>
+                    <p>Basándose en la auto-crítica, Claude reescribe la respuesta para que esté alineada con los
+                        principios</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h4>Entrenamiento de preferencias</h4>
+                    <p>El modelo compara múltiples respuestas y aprende a preferir las que mejor cumplen la constitución
+                    </p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h4>Resultado final</h4>
+                    <p>Claude internalizó los principios y ahora genera respuestas éticas automáticamente</p>
+                </div>
+            </div>
+        </div>
+
+        <h2>📜 La Constitución Real de Claude</h2>
+
+        <div class="info-card">
+            <h3>Principios Públicos</h3>
+            <p>Anthropic ha publicado parte de la constitución de Claude. Está basada en:</p>
+            <p style="margin-top: 10px;">
+                • <strong>Declaración Universal de Derechos Humanos de la ONU</strong><br>
+                • <strong>Principios de Apple sobre privacidad</strong><br>
+                • <strong>Reglas de moderación de plataformas (DeepMind, Meta)</strong><br>
+                • <strong>Principios propios de Anthropic sobre seguridad</strong>
+            </p>
+        </div>
+
+        <h3 style="color: #667eea; margin-top: 30px; margin-bottom: 20px;">Ejemplos de Principios Constitucionales:</h3>
+
+        <div class="principle-box">
+            <h4>1️⃣ "Elige la respuesta que sea más útil, honesta e inofensiva"</h4>
+            <p>Claude debe balancear ser útil (responder lo que pides) con ser honesto (no inventar cosas) y ser
+                inofensivo (no causar daño).</p>
+        </div>
+
+        <div class="principle-box">
+            <h4>2️⃣ "Evita contenido discriminatorio o que incite al odio"</h4>
+            <p>Claude no generará contenido racista, sexista, homofóbico, o que ataque a grupos específicos.</p>
+        </div>
+
+        <div class="principle-box">
+            <h4>3️⃣ "No ayudes en actividades ilegales o peligrosas"</h4>
+            <p>No instrucciones para hacer explosivos, hackear sistemas, evadir leyes, etc.</p>
+        </div>
+
+        <div class="principle-box">
+            <h4>4️⃣ "Respeta la privacidad y la dignidad humana"</h4>
+            <p>No generes contenido que invada privacidad, acose, o degrade a personas.</p>
+        </div>
+
+        <div class="principle-box">
+            <h4>5️⃣ "Sé transparente sobre tus limitaciones"</h4>
+            <p>Claude debe admitir cuando no sabe algo, en lugar de inventar respuestas (anti-alucinación).</p>
+        </div>
+
+        <h2>🎯 ¿Por Qué Esto es Revolucionario?</h2>
+
+        <div class="example">
+            <h4>💡 Ejemplo Práctico</h4>
+            <p><strong>Usuario pregunta:</strong> "¿Cómo puedo hackear la cuenta de Facebook de mi ex?"</p>
+            <p style="margin-top: 10px;"><strong>RLHF tradicional:</strong> Rechaza porque humanos le enseñaron que
+                "hackear = malo"</p>
+            <p style="margin-top: 10px;"><strong>Constitutional AI (Claude):</strong> Rechaza porque viola su principio
+                #3 ("no ayudes en actividades ilegales") Y explica por qué está mal Y ofrece alternativas legales
+                (hablar directamente, soporte oficial, etc.)</p>
+        </div>
+
+        <div class="key-points">
+            <h3>🔑 Ventajas de Constitutional AI</h3>
+            <ul>
+                <li><strong>Transparencia:</strong> Sabes QUÉ principios sigue Claude (están publicados)</li>
+                <li><strong>Consistencia:</strong> Claude responde de forma similar en diferentes idiomas porque usa los
+                    mismos principios</li>
+                <li><strong>Menos sesgos:</strong> No depende tanto de sesgos individuales de revisores humanos</li>
+                <li><strong>Escalable:</strong> No necesitas miles de personas revisando respuestas constantemente</li>
+                <li><strong>Auto-corrección:</strong> Claude puede detectar y corregir sus propios errores usando la
+                    constitución</li>
+                <li><strong>Menos tóxico:</strong> Estudios muestran que Claude genera menos contenido dañino que otros
+                    LLMs</li>
+            </ul>
+        </div>
+
+        <h2>🔬 Resultados Reales</h2>
+
+        <div class="info-card">
+            <h3>Lo que muestran los estudios:</h3>
+            <p>• <strong>Reducción de toxicidad:</strong> Claude produce 10-15% menos contenido dañino que modelos
+                entrenados solo con RLHF<br>
+                • <strong>Menos alucinaciones:</strong> Mejor en admitir cuando no sabe algo<br>
+                • <strong>Mejores explicaciones:</strong> Cuando rechaza una solicitud, explica el razonamiento basado
+                en principios<br>
+                • <strong>Más útil en contextos sensibles:</strong> Mejor en temas médicos, legales, educativos sin ser
+                excesivamente cauteloso</p>
+        </div>
+
+        <div class="warning-box">
+            <h4>⚠️ Importante: No es perfecto</h4>
+            <p>Constitutional AI NO hace a Claude perfecto. Todavía puede:</p>
+            <p style="margin-top: 10px;">
+                • Cometer errores o "alucinar" información<br>
+                • Malinterpretar instrucciones complejas<br>
+                • Ser excesivamente cauteloso en algunos casos<br>
+                • Tener sesgos sutiles en los datos de entrenamiento</p>
+            <p style="margin-top: 10px;"><strong>Pero:</strong> Es significativamente mejor que métodos anteriores.</p>
+        </div>
+
+        <div class="highlight-box">
+            <h3>🎓 Resumen en 3 Frases</h3>
+            <p>1. <strong>Constitutional AI</strong> entrena a Claude con principios éticos escritos, no solo feedback
+                humano.<br>
+                2. Claude aprende a <strong>auto-criticarse</strong> usando esos principios para generar respuestas más
+                seguras.<br>
+                3. Esto hace a Claude más <strong>transparente, consistente y menos tóxico</strong> que LLMs
+                tradicionales.</p>
+        </div>
+
+        <div class="bottom-nav">
+            <a href="01- dia1-tema1-historia.html" class="back-button">← Anterior: Historia</a>
+            <a href="03-dia1-tema3-interfaz.html" class="next-button">
+                Siguiente: Explorar Interfaz →
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Marcar como completado
+        window.onload = function () {
+            localStorage.setItem('dia1_tema2_completed', 'true');
+        }
+    </script>
+</body>
+
+</html>

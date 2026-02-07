@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Estudio Claude.ai - 7 Días</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .day {
+            margin-bottom: 25px;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .day:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .day-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .day-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .day-title {
+            font-size: 1.5em;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .topics {
+            margin-top: 15px;
+        }
+
+        .topic {
+            padding: 10px 15px;
+            margin: 8px 0;
+            background: white;
+            border-radius: 8px;
+            border-left: 3px solid #764ba2;
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            cursor: pointer;
+        }
+
+        .time-badge {
+            background: #764ba2;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            margin-left: auto;
+            white-space: nowrap;
+        }
+
+        .tip {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .tip-title {
+            font-weight: bold;
+            color: #856404;
+            margin-bottom: 5px;
+        }
+
+        .progress-container {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 10px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .resources {
+            background: #e8f5e9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+        .resources h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+        }
+
+        .resources ul {
+            list-style: none;
+        }
+
+        .resources li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .resources li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #2e7d32;
+            font-weight: bold;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .nav-bar {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            .nav-button {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+            .bottom-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .next-button, .back-button {
+                width: 100%;
+                justify-content: center;
+            }
+            /* Grid adjustments */
+            .vs-grid, .skills-grid, .stat-grid, .grid-container, .features {
+                grid-template-columns: 1fr !important;
+            }
+            /* Table adjustments */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            /* Topic list specific (Day 0) */
+            .topic {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .topic span {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            .topic a {
+                width: 100%;
+                text-align: center;
+                display: block;
+                margin: 5px 0;
+            }
+            .time-badge {
+                align-self: flex-start;
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🚀 Domina Claude.ai en 7 Días</h1>
+        <p class="subtitle">Tu ruta intensiva para convertirte en experto</p>
+
+        <div class="progress-container">
+            <h3 style="margin-bottom: 10px;">Tu Progreso:</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress">0%</div>
+            </div>
+        </div>
+
+        <div class="tip">
+            <div class="tip-title">💡 Consejo Pro:</div>
+            Abre una cuenta gratuita en claude.ai AHORA mismo para practicar mientras aprendes. La teoría sin práctica
+            no sirve de nada.
+        </div>
+
+        <!-- DÍA 1 -->
+        <div class="day">
+            <div class="day-header">
+                <div class="day-number">1</div>
+                <div class="day-title">Fundamentos y Primer Contacto</div>
+            </div>
+            <div class="topics">
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Qué es Claude.ai y su historia (Anthropic, 2023-2026)</span>
+                    <a href="01- dia1-tema1-historia.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">30 min</span>
+                </div>
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Constitutional AI: el cerebro ético de Claude</span>
+                    <a href="02-dia1-tema2-constitutional-ai.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">45 min</span>
+                </div>
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Crear cuenta gratuita y explorar la interfaz</span>
+                    <a href="03-dia1-tema3-interfaz.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">20 min</span>
+                </div>
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Familia de modelos: Opus 4.5, Sonnet 4.5, Haiku 4.5</span>
+                    <a href="04-dia1-tema4-modelos.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">40 min</span>
+                </div>
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Práctica: Tu primera conversación y análisis de imagen</span>
+                    <a href="05-dia1-tema5-practica.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">45 min</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- DÍA 2 -->
+        <div class="day">
+            <div class="day-header">
+                <div class="day-number">2</div>
+                <div class="day-title">Características Clave y Ventanas de Contexto</div>
+            </div>
+            <div class="topics">
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Ventana de contexto: 200K - 1M tokens (¿qué significa?)</span>
+                    <a href="06-dia2-tema1-contexto.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">35 min</span>
+                </div>
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Multimodalidad: texto + imágenes (NO genera imágenes)</span>
+                    <a href="07-dia2-tema2-multimodal.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">30 min</span>
+                </div>
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Web Search: búsqueda en internet integrada (desde 2025)</span>
+                    <a href="08-dia2-tema3-websearch.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">40 min</span>
+                </div>
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Artifacts: crear documentos, código y visualizaciones</span>
+                    <a href="09-dia2-tema4-artifacts.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">50 min</span>
+                </div>
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Práctica: Crear tu primer Artifact (HTML o código)</span>
+                    <a href="10-dia2-tema5-practica-artifact.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">45 min</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- DÍA 3 -->
+        <div class="day">
+            <div class="day-header">
+                <div class="day-number">3</div>
+                <div class="day-title">Claude Code y Herramientas de Desarrollo</div>
+            </div>
+            <div class="topics">
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Claude Code: el asistente de programación en terminal</span>
+                    <a href="11-dia3-tema1-claude-code.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">45 min</span>
+                </div>
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">SWE-bench: 77.2% (mejor del mundo en coding)</span>
+                    <a href="12-dia3-tema2-swebench.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">30 min</span>
+                </div>
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Computer Use: Claude controla tu computadora (beta)</span>
+                    <a href="13-dia3-tema3-computer-use.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">40 min</span>
+                </div>
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Extended Thinking: modo de razonamiento profundo</span>
+                    <a href="14-dia3-tema4-extended-thinking.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">35 min</span>
+                </div>
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Práctica: Resolver un problema de código con Claude</span>
+                    <a href="15-dia3-tema5-practica-coding.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">50 min</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- DÍA 4 -->
+        <div class="day">
+            <div class="day-header">
+                <div class="day-number">4</div>
+                <div class="day-title">Planes, Precios y Ecosistema</div>
+            </div>
+            <div class="topics">
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Plan Free vs Pro ($20) vs Max ($100-$200)</span>
+                    <a href="16-dia4-tema1-planes-precios.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">40 min</span>
+                </div>
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Team ($25-$150/usuario) y Enterprise (personalizado)</span>
+                    <a href="19-dia4-tema4-team-enterprise.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">30 min</span>
+                </div>
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">API: precios por tokens y casos de uso</span>
+                    <a href="17-dia4-tema2-api.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">45 min</span>
+                </div>
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Integraciones: Slack, Google Workspace, Microsoft 365</span>
+                    <a href="18-dia4-tema3-integraciones.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">35 min</span>
+                </div>
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Decisión: ¿Qué plan necesitas según tu uso?</span>
+                    <a href="20-dia4-tema5-decision.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">30 min</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- DÍA 5 -->
+        <div class="day">
+            <div class="day-header">
+                <div class="day-number">5</div>
+                <div class="day-title">Casos de Uso y Aplicaciones Prácticas</div>
+            </div>
+            <div class="topics">
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Análisis de documentos largos y PDFs</span>
+                    <a href="21-dia5-tema1-documentos.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">40 min</span>
+                </div>
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Creación de contenido: blogs, reportes, emails</span>
+                    <a href="22-dia5-tema2-contenido.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">45 min</span>
+                </div>
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Investigación académica y científica</span>
+                    <a href="23-dia5-tema3-investigacion.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">35 min</span>
+                </div>
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Casos reales: NASA usó Claude para planear ruta en Marte</span>
+                    <a href="24-dia5-tema4-casos-empresas.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">30 min</span>
+                </div>
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Práctica: Proyecto real según tu interés profesional</span>
+                    <a href="25-dia5-tema5-proyecto.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">60 min</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- DÍA 6 -->
+        <div class="day">
+            <div class="day-header">
+                <div class="day-number">6</div>
+                <div class="day-title">Claude vs Competencia y Seguridad</div>
+            </div>
+            <div class="topics">
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Claude vs ChatGPT: Comparativa</span>
+                    <a href="26-dia6-tema1-vs-chatgpt.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">45 min</span>
+                </div>
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Claude vs Gemini: Comparativa</span>
+                    <a href="27-dia6-tema2-vs-gemini.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">35 min</span>
+                </div>
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Fortalezas y Debilidades</span>
+                    <a href="28-dia6-tema3-fortalezas.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">40 min</span>
+                </div>
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Guía: Cuándo Usar Cada Uno</span>
+                    <a href="29-dia6-tema4-cuando-usar.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">30 min</span>
+                </div>
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Práctica Comparativa</span>
+                    <a href="30-dia6-tema5-practica.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">30 min</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- DÍA 7 -->
+        <div class="day">
+            <div class="day-header">
+                <div class="day-number">7</div>
+                <div class="day-title">Futuro, Features Avanzadas y Dominio</div>
+            </div>
+            <div class="topics">
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Futuro de Claude (2026+)</span>
+                    <a href="31-dia7-tema1-futuro.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">40 min</span>
+                </div>
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Claude Cowork: Automatización GUI</span>
+                    <a href="32-dia7-tema2-cowork.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">45 min</span>
+                </div>
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Skills & MCP: Conectividad</span>
+                    <a href="33-dia7-tema3-skills-mcp.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">50 min</span>
+                </div>
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Prompt Engineering Avanzado</span>
+                    <a href="34-dia7-tema4-prompting.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">45 min</span>
+                </div>
+                <div class="topic">
+                    <input type="checkbox" class="checkbox" onchange="updateProgress()">
+                    <span style="flex-grow: 1;">Proyecto Final Integrador</span>
+                    <a href="35-dia7-tema5-proyecto-final.html"
+                        style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.8em; margin-right: 10px;">Ver
+                        Tema →</a>
+                    <span class="time-badge">90 min</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="resources">
+            <h3>📚 Recursos Esenciales</h3>
+            <ul>
+                <li><strong>claude.ai</strong> - Interfaz principal para chatear</li>
+                <li><strong>docs.claude.com</strong> - Documentación oficial completa</li>
+                <li><strong>support.claude.com</strong> - Centro de ayuda</li>
+                <li><strong>Anthropic Blog</strong> - Actualizaciones y casos de uso</li>
+                <li><strong>claude.com/pricing</strong> - Planes y precios actualizados</li>
+                <li><strong>Chatbot Arena</strong> - Comparativas en vivo con otros LLMs</li>
+            </ul>
+        </div>
+
+        <div class="tip" style="margin-top: 30px;">
+            <div class="tip-title">🎯 Al finalizar esta semana sabrás:</div>
+            ✅ Usar Claude mejor que el 90% de los usuarios<br>
+            ✅ Decidir cuándo usar Claude vs ChatGPT vs Gemini<br>
+            ✅ Automatizar tareas con Claude Code y Artifacts<br>
+            ✅ Aprovechar la ventana de contexto masiva<br>
+            ✅ Integrar Claude en tu flujo de trabajo profesional
+        </div>
+    </div>
+
+    <script>
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('.checkbox');
+            const checked = document.querySelectorAll('.checkbox:checked').length;
+            const total = checkboxes.length;
+            const percentage = Math.round((checked / total) * 100);
+
+            const progressFill = document.getElementById('progress');
+            progressFill.style.width = percentage + '%';
+            progressFill.textContent = percentage + '%';
+
+            // Guardar progreso en localStorage
+            localStorage.setItem('claudeProgress', percentage);
+        }
+
+        // Cargar progreso guardado
+        window.onload = function () {
+            const saved = localStorage.getItem('claudeProgress');
+            if (saved) {
+                const progressFill = document.getElementById('progress');
+                progressFill.style.width = saved + '%';
+                progressFill.textContent = saved + '%';
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Día 3.5 - Práctica: Resolver Problema de Código</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .breadcrumb {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        h2 {
+            color: #667eea;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fff3cd, #ffe69c);
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 10px;
+        }
+
+        .highlight-box h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .exercise-card {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .exercise-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .exercise-card h3 {
+            color: #667eea;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .code-box {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+
+        .prompt-box {
+            background: white;
+            border: 2px dashed #667eea;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            color: #333;
+        }
+
+        .prompt-label {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .tip-box {
+            background: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .tip-box h4 {
+            color: #1565c0;
+            margin-bottom: 10px;
+        }
+
+        .checklist {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+
+        .checklist h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .checklist-item {
+            padding: 12px;
+            margin: 10px 0;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            border-left: 3px solid #4caf50;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        .congrats-box {
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+        }
+
+        .congrats-box h2 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .skills-learned {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .skill-badge {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .bottom-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .next-button {
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .next-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .back-button {
+            background: linear-gradient(135deg, #757575, #616161);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(117, 117, 117, 0.4);
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .nav-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+            .nav-button {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+            .bottom-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .next-button, .back-button {
+                width: 100%;
+                justify-content: center;
+            }
+            /* Grid adjustments */
+            .vs-grid, .skills-grid, .stat-grid, .grid-container {
+                grid-template-columns: 1fr !important;
+            }
+            /* Table adjustments */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            /* Topic list specific (Day 0) */
+            .topic {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .topic span {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            .topic a {
+                width: 100%;
+                text-align: center;
+                display: block;
+                margin: 5px 0;
+            }
+            .time-badge {
+                align-self: flex-start;
+                margin-top: 5px;
+            }
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .nav-bar {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            .nav-button {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+            .bottom-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .next-button, .back-button {
+                width: 100%;
+                justify-content: center;
+            }
+            /* Grid adjustments */
+            .vs-grid, .skills-grid, .stat-grid, .grid-container, .features {
+                grid-template-columns: 1fr !important;
+            }
+            /* Table adjustments */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            /* Topic list specific (Day 0) */
+            .topic {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .topic span {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            .topic a {
+                width: 100%;
+                text-align: center;
+                display: block;
+                margin: 5px 0;
+            }
+            .time-badge {
+                align-self: flex-start;
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="0- plan-estudio-claude-ai.html" class="nav-button">← Volver al Plan</a>
+            <div style="color: #667eea; font-weight: 600;">Día 3 - Tema 5/5</div>
+        </div>
+
+        <div class="breadcrumb">Día 3: Claude Code y Desarrollo → Práctica: Resolver Problema de Código</div>
+
+        <h1>🎯 Práctica: Debugging con Claude</h1>
+        <p class="subtitle">Ejercicios prácticos para dominar Claude en programación</p>
+
+        <div class="highlight-box">
+            <h3>🎯 Lo que vas a hacer en 50 minutos:</h3>
+            <p>• Encontrar y corregir 3 bugs con ayuda de Claude<br>
+                • Optimizar código ineficiente<br>
+                • Refactorizar código legacy<br>
+                • Aplicar todo lo aprendido del Día 3</p>
+        </div>
+
+        <h2>🐛 Ejercicio 1: Bug Sutil (15 min)</h2>
+
+        <div class="exercise-card">
+            <div class="exercise-number">1</div>
+            <h3>Encontrá el Bug Escondido</h3>
+            <p style="color: #555; line-height: 1.6; margin-bottom: 15px;">
+                Este código debería filtrar productos por precio, pero hay usuarios reportando que no funciona
+                correctamente.
+            </p>
+
+            <div class="code-box">
+                <span style="color: #569cd6;">function</span> <span
+                    style="color: #dcdcaa;">filterByPrice</span>(products, maxPrice) {
+                <span style="color: #569cd6;">let</span> filtered = [];
+                <span style="color: #569cd6;">for</span> (<span style="color: #569cd6;">let</span> i = <span
+                    style="color: #b5cea8;">0</span>; i <= products.length; i++) { <span style="color: #569cd6;">
+                    if</span> (products[i].price <= maxPrice) { filtered.push(products[i]); } } <span
+                        style="color: #c586c0;">return</span> filtered;
+                        }
+
+                        <span style="color: #6a9955;">// Test</span>
+                        <span style="color: #569cd6;">const</span> products = [
+                        { name: <span style="color: #ce9178;">"Laptop"</span>, price: <span
+                            style="color: #b5cea8;">1000</span> },
+                        { name: <span style="color: #ce9178;">"Mouse"</span>, price: <span
+                            style="color: #b5cea8;">25</span> },
+                        { name: <span style="color: #ce9178;">"Keyboard"</span>, price: <span
+                            style="color: #b5cea8;">75</span> }
+                        ];
+                        console.log(filterByPrice(products, <span style="color: #b5cea8;">100</span>));
+            </div>
+
+            <div class="prompt-box">
+                <div class="prompt-label">💬 PROMPT PARA COPIAR EN CLAUDE:</div>
+                <div class="prompt-text" style="color: #555; line-height: 1.6;">
+                    Este código tiene un bug. Usuarios reportan que a veces crashea.
+
+                    [Pega el código arriba]
+
+                    Encuentra el bug, explica por qué pasa, y dame la solución corregida.
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <h4>💡 Pista</h4>
+                <p>El problema está en el loop. Fijate en la condición del for.</p>
+            </div>
+        </div>
+
+        <h2>⚡ Ejercicio 2: Optimización (15 min)</h2>
+
+        <div class="exercise-card">
+            <div class="exercise-number">2</div>
+            <h3>Código Ineficiente que Necesita Optimización</h3>
+            <p style="color: #555; line-height: 1.6; margin-bottom: 15px;">
+                Esta función funciona, pero es LENTA con arrays grandes. Optimizala.
+            </p>
+
+            <div class="code-box">
+                <span style="color: #569cd6;">function</span> <span style="color: #dcdcaa;">findDuplicates</span>(arr) {
+                <span style="color: #569cd6;">let</span> duplicates = [];
+
+                <span style="color: #569cd6;">for</span> (<span style="color: #569cd6;">let</span> i = <span
+                    style="color: #b5cea8;">0</span>; i < arr.length; i++) { <span style="color: #569cd6;">for</span>
+                    (<span style="color: #569cd6;">let</span> j = i + <span style="color: #b5cea8;">1</span>; j <
+                        arr.length; j++) { <span style="color: #569cd6;">if</span> (arr[i] === arr[j]) {
+                        <span style="color: #569cd6;">if</span> (!duplicates.includes(arr[i])) {
+                        duplicates.push(arr[i]);
+                        }
+                        }
+                        }
+                        }
+
+                        <span style="color: #c586c0;">return</span> duplicates;
+                        }
+
+                        <span style="color: #6a9955;">// Test con array grande</span>
+                        <span style="color: #569cd6;">const</span> bigArray = Array.from({ length: <span
+                            style="color: #b5cea8;">10000</span> }, () =>
+                        Math.floor(Math.random() * <span style="color: #b5cea8;">5000</span>)
+                        );
+                        console.time(<span style="color: #ce9178;">"findDuplicates"</span>);
+                        console.log(findDuplicates(bigArray));
+                        console.timeEnd(<span style="color: #ce9178;">"findDuplicates"</span>);
+            </div>
+
+            <div class="prompt-box">
+                <div class="prompt-label">💬 PROMPT PARA COPIAR EN CLAUDE:</div>
+                <div class="prompt-text" style="color: #555; line-height: 1.6;">
+                    Esta función encuentra duplicados pero es muy lenta con arrays grandes (O(n²)).
+
+                    [Pega el código arriba]
+
+                    Optimízala para que sea O(n). Explica:
+                    1. Por qué es lenta ahora (complejidad actual)
+                    2. Tu solución optimizada
+                    3. La complejidad mejorada
+                    4. Benchmark comparativo si es posible
+                </div>
+            </div>
+        </div>
+
+        <h2>🏗️ Ejercicio 3: Refactoring Legacy (20 min)</h2>
+
+        <div class="exercise-card">
+            <div class="exercise-number">3</div>
+            <h3>Refactorizar Código Legacy</h3>
+            <p style="color: #555; line-height: 1.6; margin-bottom: 15px;">
+                Código viejo y difícil de mantener. Necesita refactoring completo.
+            </p>
+
+            <div class="code-box">
+                <span style="color: #569cd6;">function</span> <span style="color: #dcdcaa;">processOrder</span>(o) {
+                <span style="color: #569cd6;">var</span> t = <span style="color: #b5cea8;">0</span>;
+                <span style="color: #569cd6;">for</span> (<span style="color: #569cd6;">var</span> i = <span
+                    style="color: #b5cea8;">0</span>; i < o.items.length; i++) { t=t + o.items[i].price *
+                    o.items[i].qty; } <span style="color: #569cd6;">if</span> (o.customer.type == <span
+                        style="color: #ce9178;">"premium"</span>) {
+                    t = t * <span style="color: #b5cea8;">0.9</span>;
+                    } <span style="color: #569cd6;">else</span> <span style="color: #569cd6;">if</span> (o.customer.type
+                    == <span style="color: #ce9178;">"regular"</span>) {
+                    t = t * <span style="color: #b5cea8;">0.95</span>;
+                    }
+                    <span style="color: #569cd6;">if</span> (t > <span style="color: #b5cea8;">100</span>) {
+                    t = t - <span style="color: #b5cea8;">10</span>;
+                    }
+                    <span style="color: #569cd6;">var</span> tax = t * <span style="color: #b5cea8;">0.08</span>;
+                    t = t + tax;
+                    <span style="color: #c586c0;">return</span> t;
+                    }
+
+                    <span style="color: #6a9955;">// Test</span>
+                    <span style="color: #569cd6;">var</span> order = {
+                    items: [
+                    { price: <span style="color: #b5cea8;">50</span>, qty: <span style="color: #b5cea8;">2</span> },
+                    { price: <span style="color: #b5cea8;">30</span>, qty: <span style="color: #b5cea8;">1</span> }
+                    ],
+                    customer: { type: <span style="color: #ce9178;">"premium"</span> }
+                    };
+                    console.log(processOrder(order));
+            </div>
+
+            <div class="prompt-box">
+                <div class="prompt-label">💬 PROMPT PARA COPIAR EN CLAUDE:</div>
+                <div class="prompt-text" style="color: #555; line-height: 1.6;">
+                    Este código funciona pero es difícil de leer y mantener.
+
+                    [Pega el código arriba]
+
+                    Refactorízalo aplicando mejores prácticas:
+                    1. Nombres de variables descriptivos
+                    2. Funciones más pequeñas y enfocadas
+                    3. Constantes para valores mágicos
+                    4. Mejor estructura y legibilidad
+                    5. Comentarios donde sea necesario
+                    6. ES6+ features (const/let, arrow functions, etc)
+
+                    Mantén la misma funcionalidad pero hazlo más mantenible.
+                </div>
+            </div>
+        </div>
+
+        <h2>🎓 Bonus: Extended Thinking Challenge</h2>
+
+        <div class="exercise-card">
+            <div class="exercise-number">💎</div>
+            <h3>Problema Complejo con Extended Thinking</h3>
+            <p style="color: #555; line-height: 1.6; margin-bottom: 15px;">
+                Si tenés acceso a Extended Thinking (Pro/Max), probá este desafío:
+            </p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">💬 PROMPT AVANZADO:</div>
+                <div class="prompt-text" style="color: #555; line-height: 1.6;">
+                    Tengo un sistema de e-commerce con los siguientes problemas:
+
+                    1. Las queries SQL son lentas (>5 segundos)
+                    2. El cache no está funcionando bien
+                    3. Algunos usuarios reportan datos inconsistentes
+                    4. La carga del servidor sube a 90% en horas pico
+
+                    Arquitectura actual:
+                    - Frontend: React
+                    - Backend: Node.js + Express
+                    - Database: PostgreSQL
+                    - Cache: Redis (configuración default)
+                    - Load Balancer: Nginx
+
+                    [ACTIVA EXTENDED THINKING]
+
+                    Analiza paso a paso:
+                    1. Posibles causas de cada problema
+                    2. Diagnóstico sistemático
+                    3. Soluciones priorizadas por impacto
+                    4. Plan de implementación
+                    5. Métricas para medir mejora
+
+                    Muestra tu razonamiento completo.
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <h4>💡 Observá el Proceso</h4>
+                <p>Con Extended Thinking, Claude va a mostrar cómo analiza cada problema, considera trade-offs, y llega
+                    a conclusiones. Aprende de este proceso de razonamiento.</p>
+            </div>
+        </div>
+
+        <h2>✅ Checklist de Habilidades Practicadas</h2>
+
+        <div class="checklist">
+            <h3>Marcá lo que completaste:</h3>
+            <div class="checklist-item">
+                <input type="checkbox" id="skill1">
+                <label for="skill1">Debugging: Encontré y corregí bug sutil</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="skill2">
+                <label for="skill2">Optimización: Mejoré complejidad algorítmica</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="skill3">
+                <label for="skill3">Refactoring: Limpié código legacy</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="skill4">
+                <label for="skill4">Prompts efectivos: Escribí instrucciones claras</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="skill5">
+                <label for="skill5">Extended Thinking: Probé razonamiento profundo (bonus)</label>
+            </div>
+        </div>
+
+        <div class="skills-learned">
+            <div class="skill-badge">🐛 Debugging</div>
+            <div class="skill-badge">⚡ Optimización</div>
+            <div class="skill-badge">🏗️ Refactoring</div>
+            <div class="skill-badge">🧠 Extended Thinking</div>
+            <div class="skill-badge">💬 Prompt Engineering</div>
+            <div class="skill-badge">🎯 Problem Solving</div>
+        </div>
+
+        <div class="congrats-box">
+            <h2>🎉 ¡Felicitaciones! Completaste el Día 3</h2>
+            <p style="font-size: 1.1em; line-height: 1.6; margin-top: 15px;">
+                Ahora sabés usar Claude Code, entendés el poder del 77.2% en SWE-bench, conocés Computer Use y Extended
+                Thinking, y <strong>lo más importante: pusiste todo en práctica con código real</strong>.
+            </p>
+            <p style="margin-top: 15px; font-size: 1em;">
+                Mañana vas a aprender sobre planes, precios, y el ecosistema completo de Claude.
+            </p>
+        </div>
+
+        <div class="highlight-box">
+            <h3>🎓 Lo que lograste hoy:</h3>
+            <p>✅ Dominás Claude Code y sus capacidades<br>
+                ✅ Entendés el benchmark SWE-bench (77.2%)<br>
+                ✅ Conocés Computer Use (beta) y sus limitaciones<br>
+                ✅ Sabés usar Extended Thinking para problemas complejos<br>
+                ✅ Resolviste bugs, optimizaste y refactorizaste código real<br><br>
+                <strong>Tiempo invertido hoy: ~3 horas | Progreso: 42% del plan total</strong>
+            </p>
+        </div>
+
+        <div class="bottom-nav">
+            <a href="0- plan-estudio-claude-ai.html" class="nav-button">← Volver al Plan</a>
+            <a href="14-dia3-tema4-extended-thinking.html" class="back-button">← Anterior: Extended Thinking</a>
+            <a href="16-dia4-tema1-planes-precios.html" class="next-button">Siguiente: Día 4 - Planes y Precios →</a>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            localStorage.setItem('dia3_tema5_completed', 'true');
+            localStorage.setItem('dia3_completed', 'true');
+        }
+    </script>
+</body>
+
+</html>
