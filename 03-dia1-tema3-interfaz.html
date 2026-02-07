@@ -289,113 +289,74 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(117, 117, 117, 0.4);
         }
+
         @media (max-width: 768px) {
             .container {
                 padding: 20px;
             }
+
             h1 {
                 font-size: 2em;
             }
-            .nav-bar {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 15px;
-            }
-            .nav-button {
-                width: 100%;
-                text-align: center;
-                margin-bottom: 5px;
-            }
-            .bottom-nav {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .next-button, .back-button {
-                width: 100%;
-                justify-content: center;
-            }
-            /* Grid adjustments */
-            .vs-grid, .skills-grid, .stat-grid, .grid-container {
-                grid-template-columns: 1fr !important;
-            }
-            /* Table adjustments */
-            table {
-                display: block;
-                overflow-x: auto;
-                white-space: nowrap;
-            }
-            /* Topic list specific (Day 0) */
-            .topic {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            .topic span {
-                width: 100%;
-                margin-bottom: 5px;
-            }
-            .topic a {
-                width: 100%;
-                text-align: center;
-                display: block;
-                margin: 5px 0;
-            }
-            .time-badge {
-                align-self: flex-start;
-                margin-top: 5px;
-            }
-        }
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-            }
-            h1 {
-                font-size: 2em;
-            }
+
             .nav-bar {
                 flex-direction: column;
                 align-items: center;
                 gap: 15px;
             }
+
             .nav-button {
                 width: 100%;
                 text-align: center;
                 margin-bottom: 5px;
             }
+
             .bottom-nav {
                 flex-direction: column;
                 gap: 15px;
             }
-            .next-button, .back-button {
+
+            .next-button,
+            .back-button {
                 width: 100%;
                 justify-content: center;
             }
+
             /* Grid adjustments */
-            .vs-grid, .skills-grid, .stat-grid, .grid-container, .features {
+            .vs-grid,
+            .skills-grid,
+            .stat-grid,
+            .grid-container,
+            .features {
                 grid-template-columns: 1fr !important;
             }
+
             /* Table adjustments */
             table {
                 display: block;
                 overflow-x: auto;
                 white-space: nowrap;
             }
+
             /* Topic list specific (Day 0) */
             .topic {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 10px;
             }
+
             .topic span {
                 width: 100%;
                 margin-bottom: 5px;
             }
+
             .topic a {
                 width: 100%;
                 text-align: center;
                 display: block;
                 margin: 5px 0;
             }
+
             .time-badge {
                 align-self: flex-start;
                 margin-top: 5px;
@@ -407,7 +368,7 @@
 <body>
     <div class="container">
         <div class="nav-bar">
-            <a href="0- plan-estudio-claude-ai.html" class="nav-button">← Volver al Plan</a>
+            <a href="index.html" class="nav-button">← Volver al Plan</a>
             <div style="color: #667eea; font-weight: 600;">Día 1 - Tema 3/5</div>
         </div>
 
@@ -599,7 +560,7 @@
         </div>
 
         <div class="bottom-nav">
-            <a href="0- plan-estudio-claude-ai.html" class="nav-button">← Volver al Plan</a>
+            <a href="index.html" class="nav-button">← Volver al Plan</a>
             <a href="02-dia1-tema2-constitutional-ai.html" class="back-button">← Anterior: Constitutional AI</a>
             <a href="04-dia1-tema4-modelos.html" class="next-button">
                 Siguiente: Familia de Modelos →
